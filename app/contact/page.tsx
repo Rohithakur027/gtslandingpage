@@ -95,7 +95,7 @@ export default function ApplyPage() {
         </h1>
         <p className="text-gray-600 max-w-3xl mx-auto text-lg">
           Take the first step towards your dream career in aviation and
-          hospitality by applying to SkyWings Aviation Academy.
+          hospitality by applying to Ground to Sky Academy.
         </p>
       </div>
 
