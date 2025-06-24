@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, Info } from "lucide-react";
+import { Check, AlertCircle } from "lucide-react";
 
 export default function ApplyPage() {
   const [formData, setFormData] = useState({
@@ -18,6 +18,11 @@ export default function ApplyPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  // Replace this with your Google Apps Script Web App URL
+  const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbzr1-mfcm8kYfAh5O9RAr-Xu9-4ouTDj6cBspH5Zok9SzhcT_Xfs81YlHx1RHhUvi3B/exec";
 
   const validateMobile = (mobile: string) => {
     const mobileRegex = /^[0-9]{10}$/;
@@ -27,32 +32,58 @@ export default function ApplyPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    // For mobile field, only allow numbers and limit to 10 digits
     if (name === "mobile") {
       const numericValue = value.replace(/[^0-9]/g, "").slice(0, 10);
       setFormData((prev) => ({ ...prev, [name]: numericValue }));
 
-      // Clear mobile error when user starts typing
       if (errors.mobile) {
         setErrors((prev) => ({ ...prev, mobile: "" }));
       }
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
 
-      // Clear name error when user starts typing
       if (errors.name) {
         setErrors((prev) => ({ ...prev, name: "" }));
       }
     }
+
+    if (submitError) {
+      setSubmitError("");
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submitToGoogleSheets = async (data: typeof formData) => {
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", data.name);
+      formDataToSend.append("mobile", data.mobile);
+      formDataToSend.append("timestamp", new Date().toISOString());
+      formDataToSend.append("source", "Aviation Academy Website");
+
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      const result = await response.text();
+
+      if (result.includes("Success")) {
+        return { success: true };
+      } else {
+        throw new Error("Failed to submit");
+      }
+    } catch (error) {
+      console.error("Error submitting to Google Sheets:", error);
+      throw new Error("Failed to submit application. Please try again.");
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Reset errors
     setErrors({ name: "", mobile: "" });
+    setSubmitError("");
 
-    // Validation
     let hasErrors = false;
     const newErrors = { name: "", mobile: "" };
 
@@ -76,12 +107,18 @@ export default function ApplyPage() {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await submitToGoogleSheets(formData);
       setIsSuccess(true);
+      setFormData({ name: "", mobile: "" });
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 1500);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : "An unexpected error occurred"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -109,21 +146,32 @@ export default function ApplyPage() {
               Application Submitted Successfully!
             </h2>
             <p className="text-gray-600 mb-6">
-              Thank you for applying to SkyWings Aviation Academy. Our
-              admissions team will review your application and contact you
-              within 48 hours.
+              Thank you for applying to Ground to Sky Academy. Our admissions
+              team will review your application and contact you within 48 hours.
             </p>
-           
+
             <Button
-              asChild
+              onClick={() => setIsSuccess(false)}
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <a href="/">Return to Homepage</a>
+              Submit Another Application
             </Button>
           </div>
         </Card>
       ) : (
         <Card className="max-w-2xl mx-auto p-6 md:p-8 shadow-lg">
+          {submitError && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+              <AlertCircle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
+              <div>
+                <h3 className="text-sm font-medium text-red-800">
+                  Submission Error
+                </h3>
+                <p className="text-sm text-red-700 mt-1">{submitError}</p>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <h2 className="text-xl font-bold mb-6 text-primary border-b pb-2">
@@ -183,12 +231,11 @@ export default function ApplyPage() {
               </div>
             </div>
 
-            {/* Submit Button */}
             <div className="pt-4">
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-accent hover:bg-accent/90 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="w-full bg-accent hover:bg-accent/90 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? "Submitting..." : "Submit Application"}
               </Button>

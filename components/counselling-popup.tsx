@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { X, Phone, User, CheckCircle } from "lucide-react";
+import { X, Phone, User, CheckCircle, AlertCircle } from "lucide-react";
 
 interface CounselingPopupProps {
   isOpen: boolean;
@@ -21,37 +21,99 @@ export default function CounselingPopup({
 }: CounselingPopupProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     message: "",
   });
 
+  // Your Google Apps Script Web App URL
+  const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbzr1-mfcm8kYfAh5O9RAr-Xu9-4ouTDj6cBspH5Zok9SzhcT_Xfs81YlHx1RHhUvi3B/exec";
+
+  const submitToGoogleSheets = async (data: typeof formData) => {
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", data.name);
+      formDataToSend.append("mobile", data.phone); // Using 'mobile' to match your existing script
+      formDataToSend.append("message", data.message);
+      formDataToSend.append("timestamp", new Date().toISOString());
+      formDataToSend.append("source", "Counseling Popup");
+
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      const result = await response.text();
+
+      if (result.includes("Success")) {
+        return { success: true };
+      } else {
+        throw new Error("Failed to submit");
+      }
+    } catch (error) {
+      console.error("Error submitting to Google Sheets:", error);
+      throw new Error("Failed to submit request. Please try again.");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError("");
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // Basic validation
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      setSubmitError("Please fill in all required fields");
+      setIsSubmitting(false);
+      return;
+    }
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+    try {
+      await submitToGoogleSheets(formData);
+      setIsSuccess(true);
 
-    // Auto close after success
-    setTimeout(() => {
-      onClose();
-      setIsSuccess(false);
-      setFormData({ name: "", phone: "", message: "" });
-    }, 2000);
+      // Auto close after success
+      setTimeout(() => {
+        onClose();
+        setIsSuccess(false);
+        setFormData({ name: "", phone: "", message: "" });
+        setSubmitError("");
+      }, 2000);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : "An unexpected error occurred"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    // For phone field, only allow numbers and limit to 10 digits
+    if (name === "phone") {
+      const numericValue = value.replace(/[^0-9]/g, "").slice(0, 10);
+      setFormData({
+        ...formData,
+        [name]: numericValue,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+
+    // Clear error when user starts typing
+    if (submitError) {
+      setSubmitError("");
+    }
   };
 
   if (!isOpen) return null;
@@ -172,6 +234,16 @@ export default function CounselingPopup({
         </CardHeader>
 
         <CardContent>
+          {/* Error Message */}
+          {submitError && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
+              <AlertCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="text-sm text-red-700">{submitError}</p>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label
@@ -209,8 +281,10 @@ export default function CounselingPopup({
                 value={formData.phone}
                 onChange={handleInputChange}
                 required
+                maxLength={10}
                 className="border-[#8064f4]/30 focus:border-[#8064f4] focus:ring-[#8064f4]/20"
               />
+              <p className="text-xs text-gray-500">Enter exactly 10 digits</p>
             </div>
 
             <div className="space-y-2">
@@ -234,7 +308,7 @@ export default function CounselingPopup({
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-[#8064f4] to-[#9575f5] hover:from-[#6b52d9] hover:to-[#8064f4] text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              className="w-full bg-gradient-to-r from-[#8064f4] to-[#9575f5] hover:from-[#6b52d9] hover:to-[#8064f4] text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? "Taking Off..." : "Get Free Counseling"}
             </Button>

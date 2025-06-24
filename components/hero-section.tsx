@@ -60,7 +60,7 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
                   className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 text-lg transform hover:scale-105"
                   asChild
                 >
-                  <Link href="/admission">
+                  <Link href="/contact">
                     <Headphones className="w-5 h-5" />
                     <span>Book Free Counseling</span>
                   </Link>
