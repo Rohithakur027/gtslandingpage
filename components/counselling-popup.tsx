@@ -30,7 +30,7 @@ export default function CounselingPopup({
 
   // Your Google Apps Script Web App URL
   const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbzr1-mfcm8kYfAh5O9RAr-Xu9-4ouTDj6cBspH5Zok9SzhcT_Xfs81YlHx1RHhUvi3B/exec";
+    "https://script.google.com/macros/s/AKfycbyviVIE7-c_Es0gNz64Q-9PeIuXXJ9s6C7wddXySZYQFHGtz1mRCjsvsowxrRifs4IT/exec";
 
   const submitToGoogleSheets = async (data: typeof formData) => {
     try {
