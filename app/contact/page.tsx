@@ -235,7 +235,11 @@ export default function ApplyPage() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-accent hover:bg-accent/90 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`w-full ${
+                  isSubmitting
+                    ? "bg-[#796efd]/80 animate-pulse"
+                    : "bg-[#796efd] hover:bg-[#695ef0]"
+                } text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed`}
               >
                 {isSubmitting ? "Submitting..." : "Submit Application"}
               </Button>
