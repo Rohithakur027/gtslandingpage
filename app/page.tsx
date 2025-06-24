@@ -9,7 +9,7 @@ import FeaturesSection from "@/components/features-section";
 import HowItWorksSection from "@/components/how-it-works";
 import CoursesSection from "@/components/course-section";
 import FAQSection from "@/components/faq-section";
-import FinalCTASection from "@/components/ui/final-cta-section";
+import FinalCTASection from "@/components/final-cta-section";
 import Footer from "@/components/footer";
 import CounselingPopup from "@/components/counselling-popup";
 

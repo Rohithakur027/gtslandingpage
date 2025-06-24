@@ -113,13 +113,7 @@ export default function ApplyPage() {
               admissions team will review your application and contact you
               within 48 hours.
             </p>
-            {/* <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 flex items-start">
-              <Info className="h-5 w-5 text-blue-500 mr-3 mt-0.5 flex-shrink-0" />
-              <p className="text-blue-700 text-sm">
-                Please check your mobile for a confirmation SMS. Our team will
-                contact you on the provided number.
-              </p>
-            </div> */}
+           
             <Button
               asChild
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"

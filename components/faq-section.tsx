@@ -2,6 +2,7 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import Image from "next/image"
+import airhostess from "@/public/images/air-hostess.jpg"
 
 export default function FAQSection() {
   return (
@@ -10,8 +11,9 @@ export default function FAQSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           <div className="hidden md:block">
             <Image
-              src="/placeholder.svg?height=400&width=500"
+              src={airhostess}
               alt="FAQ Illustration"
+            
               width={500}
               height={400}
               className="object-contain"

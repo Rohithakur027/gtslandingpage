@@ -17,7 +17,7 @@ export default function Navigation() {
               <span className="text-xl font-bold text-slate-800">Ground to Sky Academy</span>
               <div className="flex items-center space-x-1 text-xs text-green-600">
                 <CheckCircle className="w-3 h-3" />
-                <span>Govt. Approved</span>
+                <span>ISO Certified</span>
               </div>
             </div>
           </div>

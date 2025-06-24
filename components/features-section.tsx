@@ -31,7 +31,7 @@ export default function FeaturesSection() {
                 <Plane className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-lg font-bold text-[#032789] mb-4">
-                100% Placement Guarantee
+                100% Placement Assitance
               </h3>
               <p className="text-sm text-slate-600">
                 Guaranteed job placement in top airlines and hospitality brands
@@ -39,7 +39,7 @@ export default function FeaturesSection() {
               </p>
             </CardContent>
           </Card>
-
+          
           <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105 bg-white hover:bg-[#f0e4fc] transition-colors duration-300">
             <CardContent className="p-8">
               <div className="w-16 h-16 bg-gradient-to-br from-[#fbbf24] to-[#f59e0b] rounded-full flex items-center justify-center mb-6">
