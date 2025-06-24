@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { CheckCircle, Sparkles, Phone } from "lucide-react"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { CheckCircle, Sparkles, Phone } from "lucide-react";
+import Link from "next/link";
 
 export default function Navigation() {
   return (
@@ -14,7 +14,9 @@ export default function Navigation() {
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <div>
-              <span className="text-xl font-bold text-slate-800">Ground to Sky Academy</span>
+              <span className="text-xl font-bold text-slate-800">
+                Ground to Sky Academy
+              </span>
               <div className="flex items-center space-x-1 text-xs text-green-600">
                 <CheckCircle className="w-3 h-3" />
                 <span>ISO Certified</span>
@@ -22,23 +24,38 @@ export default function Navigation() {
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="#courses" className="text-slate-600 hover:text-[#796efd] transition-colors">
+            <Link
+              href="#courses"
+              className="text-slate-600 hover:text-[#796efd] transition-colors"
+            >
               Courses
             </Link>
-            <Link href="#about-us" className="text-slate-600 hover:text-[#796efd] transition-colors">
+            <Link
+              href="#about-us"
+              className="text-slate-600 hover:text-[#796efd] transition-colors"
+            >
               About Us
             </Link>
-            <Link href="#placements" className="text-slate-600 hover:text-[#796efd] transition-colors">
+            <Link
+              href="#placements"
+              className="text-slate-600 hover:text-[#796efd] transition-colors"
+            >
               Placements
             </Link>
-            <Link href="#contact" className="text-slate-600 hover:text-[#796efd] transition-colors">
+            <Link
+              href="#contact"
+              className="text-slate-600 hover:text-[#796efd] transition-colors"
+            >
               Contact
             </Link>
             <div className="flex items-center space-x-2 text-sm text-slate-600">
               <Phone className="w-4 h-4" />
-              <span>+91 98765 43210</span>
+              <span>+91 95600 02925</span>
             </div>
-            <Button className="bg-[#796efd] hover:bg-[#5a4fe0] text-white relative" asChild>
+            <Button
+              className="bg-[#796efd] hover:bg-[#5a4fe0] text-white relative"
+              asChild
+            >
               <Link href="/contact">
                 Enroll Now
                 <div className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 rounded-full animate-ping"></div>
@@ -48,5 +65,5 @@ export default function Navigation() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

@@ -1,7 +1,15 @@
-"use client"
+"use client";
 
-import { Sparkles, Twitter, Linkedin, Instagram, Phone, Mail, MapPin } from "lucide-react"
-import Link from "next/link"
+import {
+  Sparkles,
+  Twitter,
+  Linkedin,
+  Instagram,
+  Phone,
+  Mail,
+  MapPin,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -13,19 +21,31 @@ export default function Footer() {
               <div className="w-8 h-8 bg-[#796efd] rounded-lg flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-white">Ground to Sky Academy</span>
+              <span className="text-xl font-bold text-white">
+                Ground to Sky Academy
+              </span>
             </div>
             <p className="text-slate-400 max-w-sm">
-              India's leading aviation training institute with 100% placement support and industry partnerships.
+              India's leading aviation training institute with 100% placement
+              support and industry partnerships.
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-slate-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
                 <Twitter className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-slate-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
                 <Linkedin className="w-5 h-5" />
               </Link>
-              <Link href="#" className="text-slate-400 hover:text-white transition-colors">
+              <Link
+                href="#"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
                 <Instagram className="w-5 h-5" />
               </Link>
             </div>
@@ -78,7 +98,7 @@ export default function Footer() {
             <ul className="space-y-2 text-slate-400">
               <li className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
-                <span>+91 98765 43210</span>
+                <span>+91 95600 02925</span>
               </li>
               <li className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
@@ -86,7 +106,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2" />
-                <span>Delhi | Mumbai | Bangalore</span>
+                <span>Delhi</span>
               </li>
             </ul>
           </div>
@@ -95,7 +115,8 @@ export default function Footer() {
         <div className="border-t border-slate-700 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-slate-400 text-sm">
-              © {new Date().getFullYear()} Ground to Sky Academy. All rights reserved.
+              © {new Date().getFullYear()} Ground to Sky Academy. All rights
+              reserved.
             </p>
             <div className="flex space-x-6 text-sm text-slate-400 mt-4 md:mt-0">
               <Link href="#" className="hover:text-white transition-colors">
@@ -112,5 +133,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
