@@ -16,7 +16,7 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative min-h-screen px-6 md:px-8 lg:px-12 py-12 md:py-20 bg-gradient-to-br from-[#a855f7] via-[#8b5cf6] to-[#6366f1] overflow-hidden">
+    <section className="relative min-h-screen px-6 md:px-8 lg:px-12 pt-24 md:pt-20 pb-12 md:pb-20 bg-gradient-to-br from-[#a855f7] via-[#8b5cf6] to-[#6366f1] overflow-hidden">
       {/* Decorative Background Elements */}
       {/* Dot pattern - top right */}
       <div className="absolute top-16 right-16 opacity-30">
