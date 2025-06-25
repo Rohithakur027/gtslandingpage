@@ -16,7 +16,7 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative min-h-screen px-6 md:px-8 lg:px-12 pt-24 md:pt-20 pb-12 md:pb-20 bg-gradient-to-br from-[#a855f7] via-[#8b5cf6] to-[#6366f1] overflow-hidden">
+    <section className="relative min-h-screen px-6 md:px-8 lg:px-12 pt-24 md:pt-20 pb-12 md:pb-20 bg-gradient-to-br from-[#9d47ed] via-[#8b5cf6] to-[#6366f1] overflow-hidden">
       {/* Decorative Background Elements */}
       {/* Dot pattern - top right */}
       <div className="absolute top-16 right-16 opacity-30">
@@ -57,7 +57,12 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
 
               <div className="flex justify-start">
                 <Button
-                  className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 text-lg transform hover:scale-105"
+                  className="bg-orange-500 hover:bg-[#47e5b1] 
+             text-white font-semibold px-8 py-4 rounded-full 
+             shadow-lg hover:shadow-xl 
+             transition-all duration-300 
+             flex items-center gap-3 text-lg 
+             transform hover:scale-105"
                   asChild
                 >
                   <Link href="/contact">
@@ -138,7 +143,7 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
                       // Actual video iframe
                       <iframe
                         src="https://www.youtube.com/embed/f-v0upJIpKQ?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&cc_load_policy=0&fs=1&autohide=1&playsinline=1"
-                        className="absolute inset-0 w-full h-full scale-150 origin-center"
+                        className="absolute inset-0 w-full h-full scale-150 origin-top"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
                         frameBorder="0"
