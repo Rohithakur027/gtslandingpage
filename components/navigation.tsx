@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Sparkles, Phone } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import logo from "@/public/images/GTS-Logo.png";
 
 export default function Navigation() {
   return (
@@ -10,9 +12,8 @@ export default function Navigation() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-[#796efd] to-[#5a4fe0] rounded-lg flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-white" />
-            </div>
+            <Image src={logo} alt="Logo" width={100} height={100} />
+
             <div>
               <span className="text-xl font-bold text-slate-800">
                 Ground to Sky Academy
@@ -50,7 +51,7 @@ export default function Navigation() {
             </Link>
             <div className="flex items-center space-x-2 text-sm text-slate-600">
               <Phone className="w-4 h-4" />
-              <span>+91 95600 02925</span>
+              <span>+91 95600 02923</span>
             </div>
             <Button
               className="bg-[#796efd] hover:bg-[#5a4fe0] text-white relative"

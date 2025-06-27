@@ -14,7 +14,6 @@ export default function FeaturesSection() {
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-[#032789] mb-6">
             Why Choose Ground to Sky Academy?
-           
           </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             Comprehensive training programs designed to launch your successful
@@ -32,12 +31,12 @@ export default function FeaturesSection() {
                 100% Placement Assitance
               </h3>
               <p className="text-sm text-slate-600">
-                Guaranteed job placement in top airlines and hospitality brands
-                with our extensive industry network.
+                100% placement assistance in top airlines and hospitality brands
+                through our extensive industry network.
               </p>
             </CardContent>
           </Card>
-          
+
           <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105 bg-white hover:bg-[#f0e4fc] transition-colors duration-300">
             <CardContent className="p-8">
               <div className="w-16 h-16 bg-gradient-to-br from-[#fbbf24] to-[#f59e0b] rounded-full flex items-center justify-center mb-6">

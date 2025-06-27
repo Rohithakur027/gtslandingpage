@@ -1,8 +1,16 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Headphones } from "lucide-react";
+import {
+  Headphones,
+  Plane,
+  Navigation,
+  Award,
+  Users,
+  MapPin,
+} from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface HeroSectionProps {
   isVisible?: boolean;
@@ -16,86 +24,120 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative min-h-screen px-6 md:px-8 lg:px-12 pt-24 md:pt-20 pb-12 md:pb-20 bg-gradient-to-br from-[#9d47ed] via-[#8b5cf6] to-[#6366f1] overflow-hidden">
-      {/* Decorative Background Elements */}
-      {/* Dot pattern - top right */}
-      <div className="absolute top-16 right-16 opacity-30">
-        <div className="grid grid-cols-6 gap-2">
-          {Array.from({ length: 24 }).map((_, i) => (
-            <div
-              key={i}
-              className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"
-              style={{ animationDelay: `${i * 0.1}s` }}
-            ></div>
-          ))}
-        </div>
+    <section className="relative min-h-[85vh] overflow-hidden">
+      {/* Cockpit Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/hero-cockpit.jpg"
+          alt="Aircraft Cockpit"
+          fill
+          className="object-cover object-center"
+          priority
+        />
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
+        {/* Additional gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"></div>
       </div>
 
-      {/* Large circular background elements */}
-      <div className="absolute -top-32 -right-32 w-[600px] h-[600px] bg-gradient-to-br from-white/10 to-purple-300/20 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-gradient-to-tl from-blue-400/20 to-indigo-300/15 rounded-full blur-2xl"></div>
-      <div className="absolute top-1/3 right-1/4 w-[300px] h-[300px] bg-gradient-to-br from-purple-300/15 to-pink-300/10 rounded-full blur-xl"></div>
+      {/* Floating Aviation Graphics */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Airplane icons floating */}
+        <div className="absolute top-20 right-20 animate-float">
+          <Plane className="w-8 h-8 text-blue-400/60 rotate-45" />
+        </div>
+        <div className="absolute top-40 left-16 animate-float-delayed">
+          <Navigation className="w-6 h-6 text-green-400/60" />
+        </div>
+        <div className="absolute bottom-32 right-32 animate-bounce-slow">
+          <Award className="w-7 h-7 text-yellow-400/60" />
+        </div>
 
-      {/* Additional decorative shapes */}
-      <div className="absolute bottom-1/4 right-1/3 w-[200px] h-[200px] bg-gradient-to-tr from-green-300/15 to-emerald-300/10 rounded-full blur-lg"></div>
+        {/* Radar-like circles */}
+        <div className="absolute top-1/4 right-1/3 w-32 h-32 border border-blue-400/30 rounded-full animate-ping"></div>
+        <div className="absolute bottom-1/3 left-1/4 w-24 h-24 border border-green-400/30 rounded-full animate-pulse"></div>
 
-      <div className="container mx-auto relative z-10 h-full max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[80vh]">
-          {/* Left Content - Shifted slightly right */}
-          <div className="text-left space-y-8 lg:pl-8">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                Launch Your{" "}
-                <span className="block text-yellow-300">Aviation Career</span>
-                <span className="block">with Air Hostess Academy</span>
+        {/* Flight path lines */}
+        <div className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent"></div>
+        <div className="absolute bottom-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-400/30 to-transparent transform rotate-12"></div>
+      </div>
+
+      <div className="container mx-auto relative z-10 h-full max-w-7xl px-6 md:px-8 lg:px-12 pt-16 md:pt-12 pb-8 md:pb-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[65vh]">
+          {/* Left Content */}
+          <div className="text-left space-y-6 lg:pl-8">
+            {/* Aviation Badge */}
+            <div className="inline-flex items-center gap-2 bg-blue-600/20 backdrop-blur-sm border border-blue-400/30 rounded-full px-4 py-2 text-blue-300 text-sm font-medium">
+              <Plane className="w-4 h-4" />
+              <span>Elite Aviation Academy</span>
+            </div>
+
+            <div className="space-y-5">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                Soar High with{" "}
+                <span className="block text-blue-400 relative">
+                  Professional Training
+                  <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-green-400 rounded-full"></div>
+                </span>
+                <span className="block">Become a Cabin Crew Expert</span>
               </h1>
 
-              <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-lg">
-                Join 5000+ successful aviation professionals. Expert training,
-                guaranteed placement, and industry-recognized certification.
+              <p className="text-base md:text-lg text-white/90 leading-relaxed max-w-lg">
+                Transform your passion for aviation into a rewarding career.
+                Join thousands of successful cabin crew professionals with our
+                comprehensive training program.
               </p>
 
               <div className="flex justify-start">
                 <Button
-                  className="bg-orange-500 hover:bg-[#47e5b1] 
-             text-white font-semibold px-8 py-4 rounded-full 
-             shadow-lg hover:shadow-xl 
-             transition-all duration-300 
-             flex items-center gap-3 text-lg 
-             transform hover:scale-105"
+                  className="bg-gradient-to-r from-blue-600 to-green-500 hover:from-blue-700 hover:to-green-600
+           text-white font-semibold px-6 py-3 rounded-full 
+           shadow-lg hover:shadow-xl 
+           transition-all duration-300 
+           flex items-center gap-3 text-base 
+           transform hover:scale-105 border border-white/20"
                   asChild
                 >
                   <Link href="/contact">
-                    <Headphones className="w-5 h-5" />
-                    <span>Book Free Counseling</span>
+                    <Headphones className="w-4 h-4" />
+                    <span>Start Your Journey</span>
                   </Link>
                 </Button>
               </div>
             </div>
 
-            {/* Statistics */}
-            <div className="grid grid-cols-3 gap-6 pt-8">
-              <div className="text-left">
-                <div className="text-2xl lg:text-3xl font-bold text-white mb-2">
-                  5000+
+            {/* Enhanced Statistics with Aviation Icons */}
+            <div className="grid grid-cols-3 gap-4 pt-6">
+              <div className="text-left bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                <div className="flex items-center gap-2 mb-1">
+                  <Users className="w-4 h-4 text-blue-400" />
+                  <div className="text-xl lg:text-2xl font-bold text-white">
+                    5000+
+                  </div>
                 </div>
-                <div className="text-white/80 text-sm lg:text-base leading-tight">
-                  Students Placed Successfully
-                </div>
-              </div>
-              <div className="text-left">
-                <div className="text-2xl lg:text-3xl font-bold text-white mb-2">
-                  100%
-                </div>
-                <div className="text-white/80 text-sm lg:text-base leading-tight">
-                  Placement Assistance
+                <div className="text-white/80 text-xs lg:text-sm leading-tight">
+                  Graduates Placed
                 </div>
               </div>
-              <div className="text-left">
-                <div className="text-2xl lg:text-3xl font-bold text-white mb-2">
-                  50+
+              <div className="text-left bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                <div className="flex items-center gap-2 mb-1">
+                  <Award className="w-4 h-4 text-green-400" />
+                  <div className="text-xl lg:text-2xl font-bold text-white">
+                    100%
+                  </div>
                 </div>
-                <div className="text-white/80 text-sm lg:text-base leading-tight">
+                <div className="text-white/80 text-xs lg:text-sm leading-tight">
+                  Job Assistance
+                </div>
+              </div>
+              <div className="text-left bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+                <div className="flex items-center gap-2 mb-1">
+                  <MapPin className="w-4 h-4 text-yellow-400" />
+                  <div className="text-xl lg:text-2xl font-bold text-white">
+                    50+
+                  </div>
+                </div>
+                <div className="text-white/80 text-xs lg:text-sm leading-tight">
                   Airline Partners
                 </div>
               </div>
@@ -103,27 +145,35 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
           </div>
 
           {/* Right Content - Video with working play button */}
-          <div className="flex justify-center items-center mt-8 lg:mt-0 px-4 lg:px-8">
+          <div className="flex justify-center items-center mt-6 lg:mt-0 px-4 lg:px-8">
             <div className="relative">
-              {/* Device Frame */}
-              <div className="relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-6 shadow-2xl">
+              {/* Device Frame with Aviation Theme */}
+              <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-5 shadow-2xl border border-blue-400/30">
                 {/* Screen bezel */}
                 <div className="relative bg-black rounded-2xl p-3">
                   {/* Video Container */}
-                  <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 bg-black rounded-xl overflow-hidden">
+                  <div className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 bg-black rounded-xl overflow-hidden">
                     {!isVideoPlaying ? (
                       // Video thumbnail with play button
-                      <div className="relative w-full h-full bg-gradient-to-br from-purple-900 to-blue-900 flex items-center justify-center">
-                        {/* Thumbnail background */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/50 to-blue-600/50"></div>
+                      <div className="relative w-full h-full bg-gradient-to-br from-blue-900 to-slate-900 flex items-center justify-center">
+                        {/* Thumbnail background with aviation theme */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/50 to-slate-600/50"></div>
+
+                        {/* Aviation graphics on thumbnail */}
+                        <div className="absolute top-4 left-4 flex items-center gap-2">
+                          <Plane className="w-4 h-4 text-blue-400" />
+                          <span className="text-white/80 text-sm font-medium">
+                            Career Guide
+                          </span>
+                        </div>
 
                         {/* Play button */}
                         <button
                           onClick={handlePlayVideo}
-                          className="relative z-10 w-20 h-20 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 group"
+                          className="relative z-10 w-16 h-16 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 group border-4 border-blue-400/30"
                         >
                           <svg
-                            className="w-8 h-8 text-gray-800 ml-1 group-hover:text-purple-600 transition-colors duration-300"
+                            className="w-6 h-6 text-slate-800 ml-1 group-hover:text-blue-600 transition-colors duration-300"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                           >
@@ -131,12 +181,9 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
                           </svg>
                         </button>
 
-                        {/* Decorative elements on thumbnail */}
-                        <div className="absolute top-4 left-4 text-white/80 text-sm font-medium">
-                          Aviation Career
-                        </div>
-                        <div className="absolute bottom-4 right-4 text-white/60 text-xs">
-                          ▶ Watch Now
+                        <div className="absolute bottom-4 right-4 flex items-center gap-2 text-white/60 text-xs">
+                          <Navigation className="w-3 h-3" />
+                          <span>Watch Now</span>
                         </div>
                       </div>
                     ) : (
@@ -154,9 +201,7 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
                     {/* Overlays to hide YouTube branding when video is playing */}
                     {isVideoPlaying && (
                       <div className="absolute inset-0 pointer-events-none z-10">
-                        {/* Top overlay */}
                         <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-black/80 to-transparent"></div>
-                        {/* Bottom overlay */}
                         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/60 to-transparent"></div>
                       </div>
                     )}
@@ -164,23 +209,26 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
                 </div>
 
                 {/* Device details */}
-                <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-16 h-1.5 bg-gray-600 rounded-full"></div>
-                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-12 h-1.5 bg-gray-600 rounded-full"></div>
+                <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-16 h-1.5 bg-slate-600 rounded-full"></div>
+                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-12 h-1.5 bg-slate-600 rounded-full"></div>
               </div>
 
-              {/* Glow effects */}
-              <div className="absolute inset-0 bg-purple-500/20 rounded-3xl blur-2xl -z-10 scale-110"></div>
-              <div className="absolute inset-0 bg-blue-500/10 rounded-3xl blur-3xl -z-20 scale-125"></div>
+              {/* Enhanced glow effects */}
+              <div className="absolute inset-0 bg-blue-500/20 rounded-3xl blur-2xl -z-10 scale-110"></div>
+              <div className="absolute inset-0 bg-green-500/10 rounded-3xl blur-3xl -z-20 scale-125"></div>
 
-              {/* Floating elements */}
-              <div className="absolute -top-6 -right-6 w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center animate-bounce shadow-lg">
-                <span className="text-lg">✈️</span>
+              {/* Aviation-themed floating elements */}
+              <div className="absolute -top-4 -right-4 w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center animate-bounce shadow-lg border-2 border-white/20">
+                <Plane className="w-4 h-4 text-white rotate-45" />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-green-400 rounded-full flex items-center justify-center animate-pulse shadow-lg">
-                <span className="text-xl">🎓</span>
+              <div className="absolute -bottom-4 -left-4 w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center animate-pulse shadow-lg border-2 border-white/20">
+                <Award className="w-4 h-4 text-white" />
+              </div>
+              <div className="absolute top-1/2 -left-6 w-8 h-8 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center animate-float shadow-lg border-2 border-white/20">
+                <Navigation className="w-3 h-3 text-white" />
               </div>
 
-              {/* Reset button (optional) */}
+              {/* Reset button */}
               {isVideoPlaying && (
                 <button
                   onClick={() => setIsVideoPlaying(false)}
@@ -195,24 +243,62 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* Chat Support Widget */}
+      {/* Enhanced Chat Support Widget */}
       <div className="fixed bottom-6 right-6 z-50">
-        <div className="w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200 group">
-          <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
-            <svg
-              className="w-4 h-4 text-white"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
+        <div className="w-14 h-14 bg-gradient-to-r from-blue-600 to-green-500 rounded-full shadow-lg flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200 group border-2 border-white/20">
+          <svg
+            className="w-6 h-6 text-white"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fillRule="evenodd"
+              d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+              clipRule="evenodd"
+            />
+          </svg>
         </div>
       </div>
+
+      {/* Custom CSS for animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        @keyframes float-delayed {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-15px);
+          }
+        }
+        @keyframes bounce-slow {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-5px);
+          }
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float-delayed 4s ease-in-out infinite;
+        }
+        .animate-bounce-slow {
+          animation: bounce-slow 2s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }

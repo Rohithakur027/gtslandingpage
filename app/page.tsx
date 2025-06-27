@@ -12,6 +12,7 @@ import FAQSection from "@/components/faq-section";
 import FinalCTASection from "@/components/final-cta-section";
 import Footer from "@/components/footer";
 import CounselingPopup from "@/components/counselling-popup";
+import PartnerPlacementSectionOld from "@/components/partenerold";
 
 <style jsx>{`
   @keyframes float {
@@ -53,7 +54,7 @@ export default function GroundToSkyAcademy() {
       />
 
       <HeroSection isVisible={isVisible} />
-      <PartnerPlacementSection />
+      <PartnerPlacementSectionOld />
       <FeaturesSection />
       <HowItWorksSection />
       <CoursesSection />
