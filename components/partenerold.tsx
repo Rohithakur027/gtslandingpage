@@ -95,29 +95,32 @@ export default function PartnerPlacementSection() {
       `}</style>
 
       <div className="container mx-auto px-4">
-        <div className="bg-white rounded-3xl shadow-2xl p-12 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-12 max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Animated Logos Grid */}
             <div className="relative">
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                 {partners.map((partner, index) => (
                   <div
                     key={partner.name}
-                    className="bg-white rounded-xl shadow-md p-4 flex flex-col items-center justify-center min-h-[160px] animate-float border border-gray-100 hover:shadow-lg transition-shadow duration-300"
+                    className="bg-white rounded-xl shadow-md p-3 md:p-4 flex flex-col items-center justify-center min-h-[120px] md:min-h-[160px] animate-float border border-gray-100 hover:shadow-lg transition-shadow duration-300"
                     style={{ animationDelay: `${index * 0.5}s` }}
                   >
-                    {/* Logo Container - Completely flexible */}
-                    <div className="flex items-center justify-center mb-3 flex-grow">
+                    {/* Logo Container - Responsive with constraints */}
+                    <div className="flex items-center justify-center mb-2 md:mb-3 flex-grow w-full">
                       <Image
                         src={partner.logo || "/placeholder.svg"}
                         alt={`${partner.name} logo`}
                         width={partner.width}
                         height={partner.height}
-                        className="block"
+                        className="object-contain"
                         style={{
                           width: `${partner.width}px`,
                           height: `${partner.height}px`,
+                          maxWidth: "100%",
+                          maxHeight: "80px", // Mobile constraint
                         }}
+                        sizes="(max-width: 640px) 80px, (max-width: 768px) 100px, 120px"
                         onError={(e) => {
                           // Fallback if image doesn't load
                           e.currentTarget.style.display = "none";
@@ -128,55 +131,55 @@ export default function PartnerPlacementSection() {
                       />
                       {/* Fallback placeholder */}
                       <div
-                        className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center"
+                        className="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-lg flex items-center justify-center"
                         style={{ display: "none" }}
                       >
-                        <span className="text-gray-400 text-sm font-medium">
+                        <span className="text-gray-400 text-xs md:text-sm font-medium">
                           {partner.name.charAt(0)}
                         </span>
                       </div>
                     </div>
 
                     {/* Airline Name */}
-                    <div className="text-gray-500 font-medium text-xs text-center leading-tight">
+                    <div className="text-gray-500 font-medium text-xs text-center leading-tight px-1">
                       {partner.name}
                     </div>
                   </div>
                 ))}
               </div>
 
-              {/* Floating decorative elements */}
-              <div className="absolute -top-6 -right-6 w-12 h-12 bg-[#796efd]/20 rounded-full animate-ping"></div>
-              <div className="absolute -bottom-6 -left-6 w-8 h-8 bg-[#5a4fe0]/30 rounded-full animate-pulse"></div>
-              <div className="absolute top-1/2 -right-4 w-6 h-6 bg-[#796efd]/40 rounded-full animate-bounce"></div>
+              {/* Floating decorative elements - Hidden on mobile */}
+              <div className="hidden md:block absolute -top-6 -right-6 w-12 h-12 bg-[#796efd]/20 rounded-full animate-ping"></div>
+              <div className="hidden md:block absolute -bottom-6 -left-6 w-8 h-8 bg-[#5a4fe0]/30 rounded-full animate-pulse"></div>
+              <div className="hidden md:block absolute top-1/2 -right-4 w-6 h-6 bg-[#796efd]/40 rounded-full animate-bounce"></div>
             </div>
 
             {/* Content */}
-            <div className="space-y-8">
+            <div className="space-y-6 md:space-y-8">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Trusted by 5000+ Students
                 </h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-[#796efd] to-[#5a4fe0] rounded-full mb-6"></div>
               </div>
 
-              <p className="text-base text-gray-700 leading-relaxed">
+              <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                 Ground to Sky Academy offers 100% placement assistance, with our
                 students successfully placed in top airlines and leading
                 hospitality brands.
               </p>
 
-              <div className="grid grid-cols-2 gap-6 py-6">
+              <div className="grid grid-cols-2 gap-4 md:gap-6 py-4 md:py-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-2">
+                  <div className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                     100%
                   </div>
                   <div className="text-slate-600 text-xs">
-                    Placement Assitance
+                    Placement Assistance
                   </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 mb-2">
+                  <div className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                     50+
                   </div>
                   <div className="text-slate-600 text-xs">
@@ -187,12 +190,12 @@ export default function PartnerPlacementSection() {
 
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-[#796efd] to-[#5a4fe0] hover:from-[#5a4fe0] hover:to-[#796efd] text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="w-full md:w-auto bg-gradient-to-r from-[#796efd] to-[#5a4fe0] hover:from-[#5a4fe0] hover:to-[#796efd] text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 asChild
               >
                 <Link href="/contact">
                   Get in Touch
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5" />
                 </Link>
               </Button>
             </div>
