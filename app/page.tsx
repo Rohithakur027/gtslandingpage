@@ -6,7 +6,7 @@ import Navigation from "@/components/navigation";
 import HeroSection from "@/components/hero-section";
 import PartnerPlacementSection from "@/components/partener";
 import FeaturesSection from "@/components/features-section";
-import HowItWorksSection from "@/components/how-it-works";
+import HowItWorksSection from "@/components/gallery";
 import CoursesSection from "@/components/course-section";
 import FAQSection from "@/components/faq-section";
 import FinalCTASection from "@/components/final-cta-section";

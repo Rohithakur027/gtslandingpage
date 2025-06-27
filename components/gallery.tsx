@@ -126,7 +126,7 @@ export default function TrainingShowcase() {
   };
 
   // Use different image sets for mobile vs desktop
-  const mobileImages = trainingImages.slice(0, 7); // Only 7 images for mobile
+  const mobileImages = trainingImages.slice(0, 12); // Only 12 images for mobile
   const desktopImages = [
     ...trainingImages,
     ...trainingImages,
