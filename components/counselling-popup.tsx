@@ -224,7 +224,7 @@ export default function CounselingPopup({
           <Badge className="mx-auto mb-2 bg-gradient-to-r from-[#8064f4] to-[#9575f5] text-white border-0">
             🎓 Free Counseling
           </Badge>
-          <CardTitle className="text-xl font-bold text-[#8064f4]">
+          <CardTitle className="text-xl font-bold text-[#032789]">
             Get Expert Career Guidance
           </CardTitle>
           <p className="text-sm text-gray-600">
