@@ -102,7 +102,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
-                <span>info@groundtoskyacademy.com</span>
+                <span>hello@groundtoskyacademy.in</span>
               </li>
               <li className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2" />
