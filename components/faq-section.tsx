@@ -27,10 +27,7 @@ export default function FAQSection() {
               FAQ
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-[#032789] mb-3 leading-tight">
-              Frequently Asked{" "}
-              <span className="bg-gradient-to-r from-[#796efd] to-[#5a4fe0] bg-clip-text text-transparent">
-                Questions
-              </span>
+              Frequently Asked Questions
             </h2>
             <div className="w-12 h-1 bg-gradient-to-r from-[#796efd] to-[#5a4fe0] rounded-full mx-auto mb-4"></div>
             <p className="text-gray-600 text-sm leading-relaxed max-w-xl mx-auto">

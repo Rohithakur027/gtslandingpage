@@ -105,7 +105,7 @@ export default function CoursesSection() {
                 <li className="flex items-center">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
                   <span className="text-sm text-slate-600">
-                    Customer service excellence
+                    Provide simulator training
                   </span>
                 </li>
                 <li className="flex items-center">

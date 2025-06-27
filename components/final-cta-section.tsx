@@ -138,7 +138,7 @@ export default function FinalCTASection() {
                                 Air Hostess Training
                               </div>
                               <div className="text-sm md:text-lg font-bold text-blue-800">
-                                6 Months
+                                8 Months
                               </div>
                             </div>
 
