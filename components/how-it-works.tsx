@@ -158,10 +158,7 @@ export default function TrainingShowcase() {
             Training Excellence
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-[#032789] mb-6">
-            Experience Our{" "}
-            <span className="bg-gradient-to-r from-[#796efd] to-[#5a4fe0] bg-clip-text text-transparent">
-              World-Class Training
-            </span>
+            Experience Our World-Class Training
           </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             Immerse yourself in hands-on learning with industry-standard

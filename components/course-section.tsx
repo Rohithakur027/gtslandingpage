@@ -18,10 +18,7 @@ export default function CoursesSection() {
             Courses
           </Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-[#032789] mb-6">
-            Choose Your{" "}
-            <span className="bg-gradient-to-r from-[#796efd] to-[#5a4fe0] bg-clip-text text-transparent">
-              Aviation Career Path
-            </span>
+            Choose Your Aviation Career Path
           </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">
             Comprehensive training programs designed to launch your successful
