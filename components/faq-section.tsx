@@ -13,7 +13,7 @@ import Link from "next/link";
 
 export default function FAQSection() {
   return (
-    <section className="py-16 bg-[#f0e4fc] relative overflow-hidden">
+    <section  id="faqsection" className="py-16 bg-[#f0e4fc] relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-[#796efd]/10 to-[#5a4fe0]/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-tl from-[#5a4fe0]/10 to-[#796efd]/5 rounded-full blur-3xl"></div>

@@ -78,7 +78,10 @@ export default function PartnerPlacementSection() {
   ];
 
   return (
-    <section className="py-20 bg-[#f0e4fc] relative overflow-hidden">
+    <section
+      id="placements"
+      className="py-20 bg-[#f0e4fc] relative overflow-hidden"
+    >
       <style jsx>{`
         @keyframes float {
           0%,

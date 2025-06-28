@@ -32,7 +32,7 @@ export default function Navigation() {
               Courses
             </Link>
             <Link
-              href="#about-us"
+              href="#faqsection"
               className="text-slate-600 hover:text-[#796efd] transition-colors"
             >
               About Us
@@ -44,7 +44,7 @@ export default function Navigation() {
               Placements
             </Link>
             <Link
-              href="#contact"
+              href="#footer"
               className="text-slate-600 hover:text-[#796efd] transition-colors"
             >
               Contact
