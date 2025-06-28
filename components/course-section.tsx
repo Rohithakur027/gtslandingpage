@@ -194,7 +194,7 @@ export default function CoursesSection() {
                 <div className="text-3xl font-bold text-[#032789] mb-2">
                   100%
                 </div>
-                <div className="text-slate-600">Placement Rate</div>
+                <div className="text-slate-600">Placement Assistance</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-[#032789] mb-2">
