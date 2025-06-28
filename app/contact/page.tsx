@@ -152,7 +152,7 @@ export default function ApplyPage() {
 
             <Button
               onClick={() => setIsSuccess(false)}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-[#796efd] hover:bg-[#695ef0] text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
               Submit Another Application
             </Button>
