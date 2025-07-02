@@ -1,97 +1,112 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, Plane, Mail, Phone, X } from "lucide-react"
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  CheckCircle,
+  Plane,
+  Mail,
+  Phone,
+  X,
+  Home,
+  Sparkles,
+} from "lucide-react";
+import Link from "next/link";
 
 interface ThankYouModalProps {
-  isOpen?: boolean
-  onClose?: () => void
-  applicantName?: string
+  isOpen?: boolean;
+  onClose?: () => void;
+  applicantName?: string;
 }
 
 export default function ThankYouModal({
   isOpen = true,
   onClose = () => {},
-  applicantName = "Future Flight Attendant",
+  applicantName = "Applicant",
 }: ThankYouModalProps) {
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <Card className="w-full max-w-md mx-auto bg-white shadow-2xl border-0 relative">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      {/* Floating decorative elements (smaller) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-16 h-16 bg-purple-200 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-12 h-12 bg-blue-200 rounded-full opacity-30 animate-bounce"></div>
+      </div>
+
+      <Card className="w-full max-w-md mx-auto bg-white/95 backdrop-blur-sm shadow-2xl border-0 relative">
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 transition-colors"
           aria-label="Close"
         >
-          <X className="h-5 w-5" />
+          <X className="h-4 w-4" />
         </button>
 
-        <CardHeader className="text-center pb-4">
-          <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-r from-blue-500 to-sky-400 rounded-full flex items-center justify-center">
-            <CheckCircle className="h-8 w-8 text-white" />
+        <CardHeader className="text-center pb-4 pt-6">
+          {/* Success Icon (smaller) */}
+          <div className="relative mx-auto mb-4">
+            <div className="w-16 h-16 bg-gradient-to-r from-[#5a4fe0] to-purple-600 rounded-full flex items-center justify-center shadow-md">
+              <CheckCircle className="h-8 w-8 text-white" />
+            </div>
+            <div className="absolute -top-1 -right-1">
+              <Sparkles className="h-5 w-5 text-yellow-400 animate-pulse" />
+            </div>
           </div>
-          <CardTitle className="text-2xl font-bold text-gray-900 mb-2">Thank You!</CardTitle>
-          <CardDescription className="text-lg text-gray-600">
-            Your application has been successfully submitted
-          </CardDescription>
+
+          <CardTitle className="text-xl font-bold text-[#032789] mb-2">
+            Application Submitted!
+          </CardTitle>
+
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Plane className="h-4 w-4 text-[#5a4fe0]" />
+            <span className="text-sm font-semibold text-[#032789]">
+              Ground to Sky Academy
+            </span>
+          </div>
         </CardHeader>
 
-        <CardContent className="space-y-6">
-          <div className="text-center">
-            <p className="text-gray-700 mb-4">
-              Dear <span className="font-semibold text-blue-600">{applicantName}</span>,
+        <CardContent className="space-y-4 px-6 pb-6">
+          {/* Personal Message (compact) */}
+          <div className="text-center space-y-2">
+            <p className="text-base text-black">
+              Dear{" "}
+              <span className="font-semibold text-[#5a4fe0]">
+                {applicantName}
+              </span>
+              ,
             </p>
-            <p className="text-gray-600 leading-relaxed">
-              We have received your application for our Air Hostess Academy program. Our admissions team will review
-              your information and contact you within
-              <span className="font-semibold text-blue-600"> 2-3 business days</span>.
+            <p className="text-sm text-black leading-snug">
+              Thank you for choosing us for your aviation career journey.
             </p>
-          </div>
-
-          <div className="bg-gradient-to-r from-blue-50 to-sky-50 p-4 rounded-lg border border-blue-100">
-            <div className="flex items-center gap-2 mb-2">
-              <Plane className="h-5 w-5 text-blue-600" />
-              <h3 className="font-semibold text-blue-900">What's Next?</h3>
-            </div>
-            <ul className="text-sm text-blue-800 space-y-1">
-              <li>• Application review by our team</li>
-              <li>• Interview scheduling (if selected)</li>
-              <li>• Course details and enrollment information</li>
-            </ul>
-          </div>
-
-          <div className="border-t pt-4">
-            <h4 className="font-semibold text-gray-900 mb-3">Stay Connected</h4>
-            <div className="space-y-2 text-sm text-gray-600">
-              <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-blue-600" />
-                <span>info@airhostessacademy.com</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-blue-600" />
-                <span>+1 (555) 123-4567</span>
-              </div>
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-3 rounded-lg border border-green-200">
+              <p className="text-green-800 font-medium text-sm">
+                🕐 We'll contact you within an hour
+              </p>
             </div>
           </div>
 
-          <div className="flex gap-3">
+          {/* Action Buttons (compact) */}
+          <div className="flex flex-col gap-2 pt-2">
             <Button
-              onClick={onClose}
-              className="flex-1 bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white"
+              asChild
+              className="w-full bg-[#5a4fe0] hover:bg-[#4a3fd4] text-white py-2 text-sm"
             >
-              Continue Browsing
+              <Link href="/">
+                <Home className="h-3 w-3 mr-1" />
+                Back to Home
+              </Link>
             </Button>
-            <Button
-              variant="outline"
-              onClick={() => window.open("mailto:info@airhostessacademy.com", "_blank")}
-              className="flex-1 border-blue-200 text-blue-600 hover:bg-blue-50"
-            >
-              Contact Us
-            </Button>
+          </div>
+
+          {/* Footer Message (smaller) */}
+          <div className="text-center pt-2 border-t">
+            <p className="text-xs text-gray-600">
+              🔒 Your information is secure
+            </p>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

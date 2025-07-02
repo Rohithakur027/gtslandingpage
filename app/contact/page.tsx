@@ -2,12 +2,14 @@
 
 import type React from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, AlertCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 
 export default function ApplyPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
@@ -17,7 +19,6 @@ export default function ApplyPage() {
     mobile: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
   // Replace this with your Google Apps Script Web App URL
@@ -109,9 +110,9 @@ export default function ApplyPage() {
 
     try {
       await submitToGoogleSheets(formData);
-      setIsSuccess(true);
-      setFormData({ name: "", mobile: "" });
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Redirect to thank-you page on success
+      router.push("/thankyou"); // replace with your actual thank-you page route
+      return;
     } catch (error) {
       setSubmitError(
         error instanceof Error ? error.message : "An unexpected error occurred"
@@ -136,117 +137,93 @@ export default function ApplyPage() {
         </p>
       </div>
 
-      {isSuccess ? (
-        <Card className="max-w-2xl mx-auto p-8 shadow-lg">
-          <div className="text-center">
-            <div className="bg-green-100 rounded-full p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-              <Check className="h-10 w-10 text-green-600" />
+      <Card className="max-w-2xl mx-auto p-6 md:p-8 shadow-lg">
+        {submitError && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+            <AlertCircle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
+            <div>
+              <h3 className="text-sm font-medium text-red-800">
+                Submission Error
+              </h3>
+              <p className="text-sm text-red-700 mt-1">{submitError}</p>
             </div>
-            <h2 className="text-2xl font-bold text-primary mb-4">
-              Application Submitted Successfully!
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Thank you for applying to Ground to Sky Academy. Our admissions
-              team will review your application and contact you within 48 hours.
-            </p>
+          </div>
+        )}
 
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <h2 className="text-xl font-bold mb-6 text-primary border-b pb-2">
+              Application Form
+            </h2>
+
+            <div className="space-y-6">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Full Name*
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 border rounded-md focus:ring-primary focus:border-primary transition-colors ${
+                    errors.name ? "border-red-500" : "border-gray-300"
+                  }`}
+                  placeholder="Enter your full name"
+                />
+                {errors.name && (
+                  <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="mobile"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Mobile Number*
+                </label>
+                <input
+                  type="tel"
+                  id="mobile"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 border rounded-md focus:ring-primary focus:border-primary transition-colors ${
+                    errors.mobile ? "border-red-500" : "border-gray-300"
+                  }`}
+                  placeholder="Enter 10-digit mobile number"
+                  maxLength={10}
+                />
+                {errors.mobile && (
+                  <p className="mt-1 text-sm text-red-600">{errors.mobile}</p>
+                )}
+                <p className="mt-1 text-xs text-gray-500">
+                  Enter exactly 10 digits (e.g., 9876543210)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-4">
             <Button
-              onClick={() => setIsSuccess(false)}
-              className="bg-[#796efd] hover:bg-[#695ef0] text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full ${
+                isSubmitting
+                  ? "bg-[#796efd]/80 animate-pulse"
+                  : "bg-[#796efd] hover:bg-[#695ef0]"
+              } text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed`}
             >
-              Submit Another Application
+              {isSubmitting ? "Submitting..." : "Submit Application"}
             </Button>
           </div>
-        </Card>
-      ) : (
-        <Card className="max-w-2xl mx-auto p-6 md:p-8 shadow-lg">
-          {submitError && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
-              <div>
-                <h3 className="text-sm font-medium text-red-800">
-                  Submission Error
-                </h3>
-                <p className="text-sm text-red-700 mt-1">{submitError}</p>
-              </div>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <h2 className="text-xl font-bold mb-6 text-primary border-b pb-2">
-                Application Form
-              </h2>
-
-              <div className="space-y-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Full Name*
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-md focus:ring-primary focus:border-primary transition-colors ${
-                      errors.name ? "border-red-500" : "border-gray-300"
-                    }`}
-                    placeholder="Enter your full name"
-                  />
-                  {errors.name && (
-                    <p className="mt-1 text-sm text-red-600">{errors.name}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="mobile"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Mobile Number*
-                  </label>
-                  <input
-                    type="tel"
-                    id="mobile"
-                    name="mobile"
-                    value={formData.mobile}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-md focus:ring-primary focus:border-primary transition-colors ${
-                      errors.mobile ? "border-red-500" : "border-gray-300"
-                    }`}
-                    placeholder="Enter 10-digit mobile number"
-                    maxLength={10}
-                  />
-                  {errors.mobile && (
-                    <p className="mt-1 text-sm text-red-600">{errors.mobile}</p>
-                  )}
-                  <p className="mt-1 text-xs text-gray-500">
-                    Enter exactly 10 digits (e.g., 9876543210)
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4">
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full ${
-                  isSubmitting
-                    ? "bg-[#796efd]/80 animate-pulse"
-                    : "bg-[#796efd] hover:bg-[#695ef0]"
-                } text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed`}
-              >
-                {isSubmitting ? "Submitting..." : "Submit Application"}
-              </Button>
-            </div>
-          </form>
-        </Card>
-      )}
+        </form>
+      </Card>
     </div>
   );
 }

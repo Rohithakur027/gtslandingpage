@@ -2,13 +2,14 @@
 
 import type React from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { X, Phone, User, CheckCircle, AlertCircle } from "lucide-react";
+import { X, Phone, User, AlertCircle } from "lucide-react";
 
 interface CounselingPopupProps {
   isOpen: boolean;
@@ -19,8 +20,8 @@ export default function CounselingPopup({
   isOpen,
   onClose,
 }: CounselingPopupProps) {
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -28,7 +29,7 @@ export default function CounselingPopup({
     message: "",
   });
 
-  // Your Google Apps Script Web App URL
+// Google Apps Script Web App URL
   const GOOGLE_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbyviVIE7-c_Es0gNz64Q-9PeIuXXJ9s6C7wddXySZYQFHGtz1mRCjsvsowxrRifs4IT/exec";
 
@@ -73,15 +74,13 @@ export default function CounselingPopup({
 
     try {
       await submitToGoogleSheets(formData);
-      setIsSuccess(true);
-
-      // Auto close after success
-      setTimeout(() => {
-        onClose();
-        setIsSuccess(false);
-        setFormData({ name: "", phone: "", message: "" });
-        setSubmitError("");
-      }, 2000);
+      // Redirect to thank-you page on success
+      router.push("/thankyou");
+      // Reset form and close popup
+      setFormData({ name: "", phone: "", message: "" });
+      setSubmitError("");
+      onClose(); // Close the popup
+      return; // Important to prevent further execution
     } catch (error) {
       setSubmitError(
         error instanceof Error ? error.message : "An unexpected error occurred"
@@ -194,19 +193,6 @@ export default function CounselingPopup({
                   Processing your counseling request
                 </div>
               </div>
-            </div>
-          </div>
-        )}
-
-        {/* Success State */}
-        {isSuccess && (
-          <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 z-10 flex items-center justify-center">
-            <div className="text-center text-white">
-              <CheckCircle className="h-16 w-16 mx-auto mb-4 animate-bounce" />
-              <h3 className="text-xl font-bold mb-2">Request Submitted!</h3>
-              <p className="text-sm opacity-90">
-                We'll contact you within 24 hours
-              </p>
             </div>
           </div>
         )}

@@ -11,11 +11,13 @@ export default function Navigation() {
     <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md border-b border-[#796efd]/20 z-50 shadow-sm">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
+          {/* Logo Section (always visible) */}
           <div className="flex items-center space-x-2">
             <Image src={logo} alt="Logo" width={100} height={100} />
 
-            <div>
-              <span className="text-xl font-bold text-slate-800">
+            {/* Hide school name and ISO badge on mobile */}
+            <div className="hidden sm:block">
+              <span className="text-xl font-bold text-slate-800 hidden lg:block">
                 Ground to Sky Academy
               </span>
               <div className="flex items-center space-x-1 text-xs text-green-600">
@@ -24,7 +26,15 @@ export default function Navigation() {
               </div>
             </div>
           </div>
-          <div className="hidden md:flex items-center space-x-8">
+
+          {/* Mobile Number (always visible) */}
+          <div className="flex items-center space-x-2 text-sm text-slate-600 sm:hidden">
+            <Phone className="w-4 h-4" />
+            <a href="tel:+911234567890">+91 95600 02923</a>
+          </div>
+
+          {/* Full Navigation (hidden on mobile) */}
+          <div className="hidden sm:flex items-center space-x-8">
             <Link
               href="#courses"
               className="text-slate-600 hover:text-[#796efd] transition-colors"
@@ -49,10 +59,13 @@ export default function Navigation() {
             >
               Contact
             </Link>
-            <div className="flex items-center space-x-2 text-sm text-slate-600">
+
+            {/* Hide phone number on larger screens if you want (or keep both) */}
+            <div className="hidden md:flex items-center space-x-2 text-sm text-slate-600">
               <Phone className="w-4 h-4" />
               <a href="tel:+911234567890">+91 95600 02923</a>
             </div>
+
             <Button
               className="bg-[#796efd] hover:bg-[#5a4fe0] text-white relative"
               asChild
