@@ -80,7 +80,7 @@ export default function CounselingPopup({
       setFormData({ name: "", phone: "", message: "" });
       setSubmitError("");
       onClose(); // Close the popup
-      return; // Important to prevent further execution
+      return; 
     } catch (error) {
       setSubmitError(
         error instanceof Error ? error.message : "An unexpected error occurred"
