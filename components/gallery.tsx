@@ -10,7 +10,7 @@ import {
   GraduationCap,
 } from "lucide-react";
 import Image from "next/image";
-import { trainingImages } from "@/app/data/training-data";
+import { trainingImages } from "@/data/trainingdata";
 import { useEffect, useRef, useState } from "react";
 
 export default function TrainingShowcase() {

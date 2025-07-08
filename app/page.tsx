@@ -48,10 +48,10 @@ export default function GroundToSkyAcademy() {
     <div className="min-h-screen bg-gradient-to-br from-[#f0eeff] to-[#f8f7ff]">
       <Navigation />
 
-      <CounselingPopup
+      {/* <CounselingPopup
         isOpen={showCounselingPopup}
         onClose={() => setShowCounselingPopup(false)}
-      />
+      /> */}
 
       <HeroSection isVisible={isVisible} />
       <PartnerPlacementSectionOld />
