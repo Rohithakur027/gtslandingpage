@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import VideoSection from "./videosection";
+
 
 interface HeroSectionProps {
   isVisible?: boolean;
@@ -157,101 +159,7 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
           </div>
 
           {/* Right Content - Video with working play button */}
-          <div className="flex justify-center items-center mt-6 lg:mt-0 px-4 lg:px-8">
-            <div className="relative">
-              {/* Device Frame with Aviation Theme */}
-              <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-5 shadow-2xl border border-blue-400/30">
-                {/* Screen bezel */}
-                <div className="relative bg-black rounded-2xl p-3">
-                  {/* Video Container */}
-                  <div className="relative w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 bg-black rounded-xl overflow-hidden">
-                    {!isVideoPlaying ? (
-                      // Video thumbnail with play button
-                      <div className="relative w-full h-full bg-gradient-to-br from-blue-900 to-slate-900 flex items-center justify-center">
-                        {/* Thumbnail background with aviation theme */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/50 to-slate-600/50"></div>
-
-                        {/* Aviation graphics on thumbnail */}
-                        <div className="absolute top-4 left-4 flex items-center gap-2">
-                          <Plane className="w-4 h-4 text-blue-400" />
-                          <span className="text-white/80 text-sm font-medium">
-                            Career Guide
-                          </span>
-                        </div>
-
-                        {/* Play button */}
-                        <button
-                          onClick={handlePlayVideo}
-                          className="relative z-10 w-16 h-16 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 group border-4 border-blue-400/30"
-                        >
-                          <svg
-                            className="w-6 h-6 text-slate-800 ml-1 group-hover:text-blue-600 transition-colors duration-300"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        </button>
-
-                        <div className="absolute bottom-4 right-4 flex items-center gap-2 text-white/60 text-xs">
-                          <Navigation className="w-3 h-3" />
-                          <span>Watch Now</span>
-                        </div>
-                      </div>
-                    ) : (
-                      // Actual video iframe
-                      <iframe
-                        src="https://www.youtube.com/embed/f-v0upJIpKQ?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&cc_load_policy=0&fs=1&autohide=1&playsinline=1"
-                        className="absolute inset-0 w-full h-full scale-150 origin-top"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        frameBorder="0"
-                        title="Aviation Career Video"
-                      />
-                    )}
-
-                    {/* Overlays to hide YouTube branding when video is playing */}
-                    {isVideoPlaying && (
-                      <div className="absolute inset-0 pointer-events-none z-10">
-                        <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-black/80 to-transparent"></div>
-                        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Device details */}
-                <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-16 h-1.5 bg-slate-600 rounded-full"></div>
-                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-12 h-1.5 bg-slate-600 rounded-full"></div>
-              </div>
-
-              {/* Enhanced glow effects */}
-              <div className="absolute inset-0 bg-blue-500/20 rounded-3xl blur-2xl -z-10 scale-110"></div>
-              <div className="absolute inset-0 bg-green-500/10 rounded-3xl blur-3xl -z-20 scale-125"></div>
-
-              {/* Aviation-themed floating elements */}
-              <div className="absolute -top-4 -right-4 w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center animate-bounce shadow-lg border-2 border-white/20">
-                <Plane className="w-4 h-4 text-white rotate-45" />
-              </div>
-              <div className="absolute -bottom-4 -left-4 w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center animate-pulse shadow-lg border-2 border-white/20">
-                <Award className="w-4 h-4 text-white" />
-              </div>
-              <div className="absolute top-1/2 -left-6 w-8 h-8 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center animate-float shadow-lg border-2 border-white/20">
-                <Navigation className="w-3 h-3 text-white" />
-              </div>
-
-              {/* Reset button */}
-              {isVideoPlaying && (
-                <button
-                  onClick={() => setIsVideoPlaying(false)}
-                  className="absolute top-2 right-2 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white text-xs z-20 transition-all duration-300"
-                  title="Reset video"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-          </div>
+         <VideoSection/>
         </div>
       </div>
 
