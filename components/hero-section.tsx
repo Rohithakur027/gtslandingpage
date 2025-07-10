@@ -27,13 +27,25 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
     <section className="relative min-h-[85vh] overflow-hidden">
       {/* Cockpit Background Image */}
       <div className="absolute inset-0">
-        <Image
+
+
+         <video
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/videos/take-off.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+        {/* <Image
           src="/images/hero-cockpit.jpg"
           alt="Aircraft Cockpit"
           fill
           className="object-cover object-center"
           priority
-        />
+        /> */}
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
         {/* Additional gradient overlay */}
