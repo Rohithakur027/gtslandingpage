@@ -91,8 +91,7 @@ export default function FeaturesSection() {
                 Flexible Payment Options
               </h3>
               <p className="text-sm text-slate-600">
-                Easy EMI options and education loan assistance to make your
-                aviation dreams affordable.
+              Easy EMI options available to make your aviation dreams affordable.
               </p>
             </CardContent>
           </Card>

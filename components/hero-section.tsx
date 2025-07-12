@@ -90,10 +90,10 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
                 Soar High with{" "}
                 <span className="block text-blue-400 relative">
-                  Professional Training
+                  GTS Academy
                   <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-green-400 rounded-full"></div>
                 </span>
-                <span className="block">Become a Cabin Crew Expert</span>
+                <span className="block">Become An Accomplished Cabin Crew </span>
               </h1>
 
               <p className="text-base md:text-lg text-white/90 leading-relaxed max-w-lg">
@@ -114,7 +114,7 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
                 >
                   <Link href="/contact">
                     <Headphones className="w-4 h-4" />
-                    <span>Start Your Journey</span>
+                    <span>Board Now</span>
                   </Link>
                 </Button>
               </div>
@@ -126,7 +126,7 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
                 <div className="flex items-center gap-2 mb-1">
                   <Users className="w-4 h-4 text-blue-400" />
                   <div className="text-xl lg:text-2xl font-bold text-white">
-                    5000+
+                    10000+
                   </div>
                 </div>
                 <div className="text-white/80 text-xs lg:text-sm leading-tight">
