@@ -261,7 +261,7 @@ offers
               <div className="space-y-8">
                 <div>
                   <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                    Trusted by 5000+ Students
+                    Trusted by 10000+ Students
                   </h2>
                   <div className="w-16 h-1 bg-gradient-to-r from-[#796efd] to-[#5a4fe0] rounded-full mb-6"></div>
                 </div>
