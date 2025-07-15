@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 import Navigation from "@/components/navigation";
 import HeroSection from "@/components/hero-section";
-import PartnerPlacementSection from "@/components/partener";
 import FeaturesSection from "@/components/features-section";
 import HowItWorksSection from "@/components/gallery";
 import CoursesSection from "@/components/course-section";
@@ -48,10 +47,10 @@ export default function GroundToSkyAcademy() {
     <div className="min-h-screen bg-gradient-to-br from-[#f0eeff] to-[#f8f7ff]">
       <Navigation />
 
-      {/* <CounselingPopup
+      <CounselingPopup
         isOpen={showCounselingPopup}
         onClose={() => setShowCounselingPopup(false)}
-      /> */}
+      />
 
       <HeroSection isVisible={isVisible} />
       <PartnerPlacementSectionOld />
