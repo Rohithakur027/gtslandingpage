@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import Navigation from "@/components/navigation";
 import HeroSection from "@/components/hero-section";
+import PartnerPlacementSection from "@/components/partenerold";
 import FeaturesSection from "@/components/features-section";
 import HowItWorksSection from "@/components/gallery";
 import CoursesSection from "@/components/course-section";
