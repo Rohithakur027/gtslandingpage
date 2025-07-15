@@ -105,7 +105,7 @@ export default function PartnerPlacementSection() {
             <div className="space-y-6 mb-8">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  Trusted by 5000+ Students
+                  Trusted by 10000+ Students
                 </h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-[#796efd] to-[#5a4fe0] rounded-full mb-4"></div>
               </div>
