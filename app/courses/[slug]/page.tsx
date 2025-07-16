@@ -78,7 +78,7 @@ export default function CoursePage({ params }: CoursePageProps) {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold mb-6 text-blue-600">
+            <h2 className="text-2xl font-bold mb-6 text-[#032789]">
               Course Syllabus
             </h2>
             <div className="space-y-4">
@@ -103,7 +103,7 @@ export default function CoursePage({ params }: CoursePageProps) {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold mb-6 text-blue-600">
+            <h2 className="text-2xl font-bold mb-6 text-[#032789]">
               Career Opportunities
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -122,7 +122,7 @@ export default function CoursePage({ params }: CoursePageProps) {
 
         <div className="space-y-6">
           <Card className="border-0 shadow-lg sticky top-24">
-            <CardHeader className="bg-blue-600 text-white">
+            <CardHeader className="bg-[#685bef] text-white">
               <CardTitle className="text-center">Course Information</CardTitle>
             </CardHeader>
             <CardContent className="p-6 space-y-6">
@@ -163,7 +163,7 @@ export default function CoursePage({ params }: CoursePageProps) {
               <div className="space-y-3">
                 <Button
                   asChild
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                  className="w-full bg-gradient-to-r from-[#796efd] to-[#5a4fe0] hover:from-[#5a4fe0] hover:to-[#796efd] text-white px-6 py-3 text-base rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 >
                   <Link href="/apply">Apply Now</Link>
                 </Button>

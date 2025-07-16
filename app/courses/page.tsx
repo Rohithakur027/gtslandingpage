@@ -47,7 +47,7 @@ export default function CoursesPage() {
                     {course.category}
                   </span>
                 </div>
-                <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
+                <CardTitle className="text-xl group-hover:text-[#032789] transition-colors">
                   {course.title}
                 </CardTitle>
               </CardHeader>
@@ -83,7 +83,7 @@ export default function CoursesPage() {
 
                 <div className="mt-auto">
                   <div className="flex items-center justify-between">
-                    <Button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <Button className="w-full bg-gradient-to-r from-[#796efd] to-[#5a4fe0] hover:from-[#5a4fe0] hover:to-[#796efd] text-white px-6 py-3 text-base rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                       View Details
                       <ChevronRight className="ml-1 h-4 w-4" />
                     </Button>
@@ -107,7 +107,7 @@ export default function CoursesPage() {
           <Button
             asChild
             size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="bg-green-500 hover:bg-green-600 text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-0 w-full sm:w-auto"
           >
             <Link href="/contact">Get Free Career Counseling</Link>
           </Button>

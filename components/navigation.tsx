@@ -36,7 +36,7 @@ export default function Navigation() {
           {/* Full Navigation (hidden on mobile) */}
           <div className="hidden sm:flex items-center space-x-8">
             <Link
-              href="#courses"
+              href="/courses"
               className="text-slate-600 hover:text-[#796efd] transition-colors"
             >
               Courses
@@ -54,7 +54,7 @@ export default function Navigation() {
               Placements
             </Link>
             <Link
-              href="#footer"
+              href="/contact"
               className="text-slate-600 hover:text-[#796efd] transition-colors"
             >
               Contact

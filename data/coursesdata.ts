@@ -40,7 +40,7 @@ export const courses: Course[] = [
     eligibility: [
       "12th Pass from recognized board",
       "Age between 18-26 years",
-      "Height: 5'2\" minimum for females, 5'6\" for males",
+      "Height: 5'2\" minimum for females, 5'7\" for males",
       "Good communication skills in English",
       "Medical fitness certificate",
     ],
