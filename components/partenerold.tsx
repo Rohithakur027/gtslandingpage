@@ -111,8 +111,9 @@ export default function PartnerPlacementSection() {
               </div>
 
               <p className="text-sm text-gray-700 leading-relaxed">
-                Ground to Sky Academy offers 100% placement assistance.Our student have made successful transition to leading airline and esteemed hospitality brands.
-               
+                Ground to Sky Academy offers 100% placement assistance.Our
+                student have made successful transition to leading airline and
+                esteemed hospitality brands.
               </p>
 
               <div className="grid grid-cols-2 gap-4 py-4">
@@ -140,12 +141,12 @@ export default function PartnerPlacementSection() {
                 asChild
               >
                 <Link href="/contact">
-                  Contact Us 
+                  Contact Us
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>
               </Button>
             </div>
-offers
+
             {/* Company Logos Second - Mobile */}
             <div className="relative">
               <div className="grid grid-cols-2 gap-4">
@@ -297,7 +298,7 @@ offers
                   asChild
                 >
                   <Link href="/contact">
-                   Contact Us
+                    Contact Us
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Link>
                 </Button>
