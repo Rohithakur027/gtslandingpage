@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://groundtosky.in/
+
+# Sitemaps
+Sitemap: https://groundtosky.in/sitemap.xml
