@@ -5,9 +5,10 @@ import ClientLayout from "./clientlayout";
 import { GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
-  title: "Top Air Hostess Academy in Delhi | Cabin Crew & Hospitality Training",
-  description:
-    "Join the best air hostess training academy in Delhi. Get expert guidance, practical training, and 100% placement assistance for a successful aviation and hospitality career.",
+  title: "Air Hostess training in Delhi & Cabin Crew Course Delhi | Ground Staff Training India",
+  description:"Top Air Hostess Training in Delhi near Janakpuri Metro. Cabin Crew Course in Delhi, Ground Staff & Airport Operation courses in Delhi with grooming & placement support."
+    ,
+    keywords : "Air Hostess Training Delhi, Cabin Crew Course Delhi, Professional Cabin Crew Course India, Ground Staff Training India, Airport Operations Course Delhi, Air Hostess Course with Placement, Spoken English Cabin Crew Delhi, Personal Grooming Flight Attendants, Mock Interview Airlines Delhi, Janakpuri Cabin Crew Academy, Near Janakpuri Metro Air Hostess, Aviation Hospitality Training Delhi",
 };
 
 export default function RootLayout({
