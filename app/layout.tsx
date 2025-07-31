@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ClientLayout from "./clientlayout";
 import { GoogleTagManager } from "@next/third-parties/google";
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: "Air Hostess training in Delhi & Cabin Crew Course Delhi | Ground Staff Training India",
@@ -47,6 +48,7 @@ export default function RootLayout({
       </head>
       <body>
         <GoogleTagManager gtmId="GTM-KDWXFFLN" />
+         <GoogleAnalytics gaId="G-VGDWDBY3PG" />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
