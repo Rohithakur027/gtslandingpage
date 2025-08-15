@@ -1,15 +1,14 @@
 "use client";
 
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   CheckCircle,
   Plane,
-  Mail,
-  Phone,
-  X,
   Home,
   Sparkles,
+  X,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -24,11 +23,22 @@ export default function ThankYouModal({
   onClose = () => {},
   applicantName = "Applicant",
 }: ThankYouModalProps) {
+  
+  useEffect(() => {
+    if (isOpen) {
+      //  custom thank_you_shown event for GTM 
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "thank_you_shown",
+        applicantName,
+      });
+    }
+  }, [isOpen, applicantName]);
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      {/* Floating decorative elements (smaller) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-16 h-16 bg-purple-200 rounded-full opacity-20 animate-pulse"></div>
         <div className="absolute top-40 right-20 w-12 h-12 bg-blue-200 rounded-full opacity-30 animate-bounce"></div>
@@ -44,7 +54,6 @@ export default function ThankYouModal({
         </button>
 
         <CardHeader className="text-center pb-4 pt-6">
-          {/* Success Icon (smaller) */}
           <div className="relative mx-auto mb-4">
             <div className="w-16 h-16 bg-gradient-to-r from-[#5a4fe0] to-purple-600 rounded-full flex items-center justify-center shadow-md">
               <CheckCircle className="h-8 w-8 text-white" />
@@ -67,14 +76,10 @@ export default function ThankYouModal({
         </CardHeader>
 
         <CardContent className="space-y-4 px-6 pb-6">
-          {/* Personal Message (compact) */}
           <div className="text-center space-y-2">
             <p className="text-base text-black">
               Dear{" "}
-              <span className="font-semibold text-[#5a4fe0]">
-                {applicantName}
-              </span>
-              ,
+              <span className="font-semibold text-[#5a4fe0]">{applicantName}</span>,
             </p>
             <p className="text-sm text-black leading-snug">
               Thank you for choosing us for your aviation career journey.
@@ -86,7 +91,6 @@ export default function ThankYouModal({
             </div>
           </div>
 
-          {/* Action Buttons (compact) */}
           <div className="flex flex-col gap-2 pt-2">
             <Button
               asChild
@@ -99,11 +103,8 @@ export default function ThankYouModal({
             </Button>
           </div>
 
-          {/* Footer Message (smaller) */}
           <div className="text-center pt-2 border-t">
-            <p className="text-xs text-gray-600">
-              🔒 Your information is secure
-            </p>
+            <p className="text-xs text-gray-600">🔒 Your information is secure</p>
           </div>
         </CardContent>
       </Card>
