@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -23,17 +22,7 @@ export default function ThankYouModal({
   onClose = () => {},
   applicantName = "Applicant",
 }: ThankYouModalProps) {
-  
-  useEffect(() => {
-    if (isOpen) {
-      //  custom thank_you_shown event for GTM 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "thank_you_shown",
-        applicantName,
-      });
-    }
-  }, [isOpen, applicantName]);
+  // The useEffect hook that pushed the GTM event has been removed.
 
   if (!isOpen) return null;
 
