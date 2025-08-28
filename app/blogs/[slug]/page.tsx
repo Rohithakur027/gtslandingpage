@@ -1,79 +1,107 @@
-import { notFound } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, User, ArrowLeft } from "lucide-react"
-import { blogs } from "@/data/blogsdata"
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { getPostBySlug, getRelatedPosts } from "@/data/blogdata/blogs";
+import { BlogContent } from "@/components/blog/blogstructure/blog-content";
 
-interface BlogPageProps {
+import { AuthorBio } from "@/components/blog/blogstructure/author-bio";
+
+import { RelatedPosts } from "@/components/blog/blogstructure/realted-posts";
+import { SocialShare } from "@/components/blog/blogstructure/socialshare";
+import { Breadcrumbs } from "@/components/blog/blogstructure/breadcrumbs";
+
+import { BlogStructuredData } from "@/components/blog/seo/blog-structured-data";
+import { BackToTop } from "@/components/ui/back-to-top";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
+import { ReadingProgress } from "@/components/blog/blogstructure/reading-progress";
+
+interface BlogPostPageProps {
   params: {
-    slug: string
-  }
+    slug: string;
+  };
 }
 
-export default function BlogPage({ params }: BlogPageProps) {
-  const blog = blogs.find((b) => b.slug === params.slug)
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
+  const post = getPostBySlug(params.slug);
 
-  if (!blog) {
-    notFound()
+  if (!post) {
+    return {
+      title: "Post Not Found",
+    };
   }
 
+  return {
+    title: post.title,
+    description: post.metaDescription,
+    keywords: post.keywords.join(", "),
+    authors: [{ name: post.author.name }],
+    openGraph: {
+      title: post.title,
+      description: post.metaDescription,
+      type: "article",
+      publishedTime: post.publishDate,
+      authors: [post.author.name],
+      images: [
+        {
+          url: post.featuredImage,
+          alt: post.featuredImageAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.metaDescription,
+      images: [post.featuredImage],
+    },
+  };
+}
+
+export default function BlogPostPage({ params }: BlogPostPageProps) {
+  const post = getPostBySlug(params.slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  const relatedPosts = getRelatedPosts(post.id);
+  const currentUrl =
+    typeof window !== "undefined"
+      ? window.location.href
+      : `https://your-blog-domain.com/blog/${post.slug}`;
+
   return (
-    <div className="container px-4 py-12 md:px-6 md:py-24">
-      <div className="max-w-4xl mx-auto">
-        <Button asChild variant="outline" className="mb-8">
-          <Link href="/blogs">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Blogs
-          </Link>
-        </Button>
+    <ErrorBoundary>
+      <div className="min-h-screen bg-background">
+        <BlogStructuredData post={post} url={currentUrl} />
 
-        <article className="space-y-8">
-          <header className="space-y-6">
-            <Badge className="bg-accent text-white border-0">{blog.category}</Badge>
-            <h1 className="text-4xl md:text-5xl font-bold text-primary leading-tight">{blog.title}</h1>
+        <ReadingProgress />
 
-            <div className="flex items-center gap-6 text-gray-600">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
-                <span>{blog.date}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                <span>{blog.author}</span>
-              </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <Breadcrumbs post={post} />
+
+          <article className="prose prose-lg max-w-none">
+            <div className="flex items-center justify-between my-8">
+              <SocialShare post={post} />
             </div>
-          </header>
 
-          <div className="relative h-64 md:h-96 rounded-lg overflow-hidden">
-            <Image src={blog.image || "/placeholder.svg"} alt={blog.title} fill className="object-cover" />
+            <BlogContent post={post} />
+          </article>
+
+          <div className="mt-12 pt-8 border-t border-border">
+            <AuthorBio author={post.author} />
           </div>
 
-          <div className="prose prose-lg max-w-none">
-            <div dangerouslySetInnerHTML={{ __html: blog.content }} />
-          </div>
-
-          <div className="flex flex-wrap gap-2 pt-8 border-t">
-            <span className="text-sm font-medium text-gray-600">Tags:</span>
-            {blog.tags.map((tag) => (
-              <Badge key={tag} variant="outline" className="text-xs">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        </article>
-
-        <div className="mt-16 text-center">
-          <div className="bg-gray-50 rounded-lg p-8">
-            <h3 className="text-2xl font-bold mb-4 text-primary">Ready to Start Your Journey?</h3>
-            <p className="text-gray-600 mb-6">Join ground to sky Academy and turn your aviation dreams into reality.</p>
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90">
-              <Link href="/apply">Apply Now</Link>
-            </Button>
-          </div>
+          {relatedPosts.length > 0 && (
+            <div className="mt-12">
+              <RelatedPosts posts={relatedPosts} />
+            </div>
+          )}
         </div>
+
+        <BackToTop />
       </div>
-    </div>
-  )
+    </ErrorBoundary>
+  );
 }

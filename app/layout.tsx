@@ -4,6 +4,8 @@ import "./globals.css";
 import ClientLayout from "./clientlayout";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { GoogleAnalytics } from '@next/third-parties/google';
+import Script from 'next/script'
+
 
 export const metadata: Metadata = {
   title: "Air Hostess training in Delhi & Cabin Crew Course Delhi | Ground Staff Training India",
@@ -20,6 +22,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* google adword conversion tracking */}
+          <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17452776636"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-17452776636');
+          `}
+        </Script>
         {/* Meta Pixel Code */}
         <script
           dangerouslySetInnerHTML={{
@@ -37,6 +53,8 @@ export default function RootLayout({
             `,
           }}
         />
+
+        
         <noscript>
           <img
             height="1"
