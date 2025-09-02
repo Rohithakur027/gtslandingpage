@@ -1,26 +1,26 @@
-import { Plane, Building2, Users, Globe } from "lucide-react"
+import { Plane, Building2, Users, Globe } from "lucide-react";
 
 export interface Course {
-  id: string
-  title: string
-  slug: string
-  description: string
-  category: string
-  duration: string
-  classesPerDay: string
-  practicalHours: string
-  certification: string
-  image: string
-  icon: any
-  eligibility: string[]
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  duration: string;
+  classesPerDay: string;
+  practicalHours: string;
+  certification: string;
+  image: string;
+  icon: any;
+  eligibility: string[];
   syllabus: {
-    title: string
-    description: string
-  }[]
-  careerPaths: string[]
-  mentorship: string
-  placement: string
-  support: string
+    title: string;
+    description: string;
+  }[];
+  careerPaths: string[];
+  mentorship: string;
+  placement: string;
+  support: string;
 }
 
 export const courses: Course[] = [
@@ -29,45 +29,46 @@ export const courses: Course[] = [
     title: "Air Hostess Training Program",
     slug: "air-hostess-training",
     description:
-      "Comprehensive training program to become a certified flight attendant with leading airlines worldwide. Learn safety procedures, customer service, and in-flight operations.",
+      "Do you dream of walking down the aircraft aisle, greeting passengers with a warm smile, and flying across the world as part of your career? At Ground to Sky, we don't just train you—we transform you into a confident, polished, and industry-ready professional. Our 6-month Air Hostess Training Course covers everything from grooming and customer service to safety procedures and international standards.",
     category: "Aviation",
     duration: "6 Months",
     classesPerDay: "2 hours",
-    practicalHours: "40 hours",
-    certification: "Industry Certified",
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=300&fit=crop",
+    practicalHours: "40+ hours of simulations",
+    certification: "Industry-recognized & airline-accepted",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=300&fit=crop",
     icon: Plane,
     eligibility: [
       "12th Pass from recognized board",
       "Age between 18-26 years",
       "Height: 5'2\" minimum for females, 5'7\" for males",
-      "Good communication skills in English",
+      "Good English communication",
       "Medical fitness certificate",
     ],
     syllabus: [
       {
-        title: "Aviation Industry Overview",
-        description: "Understanding the aviation industry, airline operations, and career opportunities",
+        title: "Aviation Basics",
+        description: "How the industry works, roles, and opportunities",
       },
       {
-        title: "Safety & Emergency Procedures",
-        description: "Aircraft safety protocols, emergency evacuation, first aid, and firefighting",
+        title: "Safety & First Aid",
+        description: "Emergency handling, firefighting, and first aid",
       },
       {
-        title: "Customer Service Excellence",
-        description: "Passenger handling, service standards, complaint resolution, and hospitality",
+        title: "Customer Service",
+        description: "Passenger care, complaint handling, hospitality",
       },
       {
-        title: "Grooming & Personality Development",
-        description: "Professional appearance, etiquette, body language, and communication skills",
+        title: "Grooming & Personality",
+        description: "Poise, etiquette, communication, confidence",
       },
       {
-        title: "In-flight Service Training",
-        description: "Food and beverage service, cabin management, and passenger comfort",
+        title: "In-flight Service",
+        description: "Food & beverage service, passenger comfort",
       },
       {
         title: "International Protocols",
-        description: "Immigration procedures, customs regulations, and international travel requirements",
+        description: "Immigration, customs, etiquette",
       },
     ],
     careerPaths: [
@@ -75,8 +76,8 @@ export const courses: Course[] = [
       "Senior Cabin Crew",
       "Purser",
       "Ground Staff",
-      "Airport Customer Service",
-      "Airline Training Instructor",
+      "Airport Service Executive",
+      "Airline Trainer",
     ],
     mentorship: "One-to-One Mentorship",
     placement: "100% Placement Assistance",
@@ -84,48 +85,49 @@ export const courses: Course[] = [
   },
   {
     id: "2",
-    title: "Hospitality Management",
-    slug: "hospitality-management",
+    title: "Hotel Operations Management",
+    slug: "hotel-operations-management",
     description:
-      "Professional training in hotel and hospitality management with focus on luxury service standards, guest relations, and hotel operations management.",
+      "The hotel industry is all about creating unforgettable experiences for guests. If you see yourself working in luxury hotels, resorts, or event spaces, our 8-month Hotel Operations Management Course is your launchpad. This isn't just about theory—you'll get 50+ hours of hands-on practice to prepare for real-world hotel operations.",
     category: "Hospitality",
     duration: "8 Months",
     classesPerDay: "2 hours",
-    practicalHours: "50 hours",
-    certification: "Industry Certified",
-    image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop",
+    practicalHours: "50+ hours of simulations",
+    certification: "Industry-accepted",
+    image:
+      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop",
     icon: Building2,
     eligibility: [
       "12th Pass from recognized board",
       "Age between 18-28 years",
-      "Good communication skills",
-      "Pleasant personality",
+      "Good English communication",
+      "Professional grooming & personality",
       "Basic computer knowledge",
     ],
     syllabus: [
       {
-        title: "Hotel Operations Management",
-        description: "Front office operations, housekeeping, food & beverage service",
+        title: "Hotel Operations",
+        description: "Front office, housekeeping, F&B basics",
       },
       {
-        title: "Customer Relationship Management",
-        description: "Guest relations, complaint handling, and service recovery",
+        title: "Customer Relations",
+        description: "Handling complaints, guest feedback",
       },
       {
         title: "Food & Beverage Service",
-        description: "Restaurant service, bar operations, and banquet management",
+        description: "Fine dining, banquets, bar service",
       },
       {
-        title: "Housekeeping Operations",
-        description: "Room maintenance, laundry operations, and quality control",
+        title: "Housekeeping",
+        description: "Room upkeep, hygiene, eco-friendly practices",
       },
       {
         title: "Event Management",
-        description: "Conference planning, wedding coordination, and corporate events",
+        description: "Weddings, corporate events, banquets",
       },
       {
-        title: "Hotel Software Training",
-        description: "Property management systems, booking engines, and POS systems",
+        title: "Hotel Software",
+        description: "PMS, POS, booking systems",
       },
     ],
     careerPaths: [
@@ -133,8 +135,8 @@ export const courses: Course[] = [
       "Guest Relations Officer",
       "Restaurant Manager",
       "Event Coordinator",
-      "Hotel Supervisor",
       "Concierge",
+      "Hotel Supervisor",
     ],
     mentorship: "One-to-One Mentorship",
     placement: "100% Placement Assistance",
@@ -145,54 +147,55 @@ export const courses: Course[] = [
     title: "Airport Ground Staff Training",
     slug: "airport-ground-staff",
     description:
-      "Specialized training for airport ground operations including check-in procedures, baggage handling, customer service, and airport security protocols.",
+      "Not all heroes wear uniforms—some ensure every flight runs smoothly from the ground up. If you want to work at the heart of aviation but not as cabin crew, then this 4-month Airport Ground Staff Course is perfect for you. We prepare you for real airport environments with 35+ hours of practical training.",
     category: "Aviation",
     duration: "4 Months",
     classesPerDay: "2 hours",
-    practicalHours: "35 hours",
-    certification: "Industry Certified",
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
+    practicalHours: "35+ hours",
+    certification: "Recognized across aviation industry",
+    image:
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
     icon: Users,
     eligibility: [
       "12th Pass from recognized board",
       "Age between 18-30 years",
       "Good physical fitness",
-      "Basic English communication",
+      "English communication basics",
       "No criminal background",
     ],
     syllabus: [
       {
         title: "Airport Operations",
-        description: "Understanding airport layout, terminal operations, and security procedures",
+        description: "Terminal structure, SOPs, coordination",
       },
       {
         title: "Check-in Procedures",
-        description: "Passenger check-in, baggage handling, and boarding procedures",
+        description: "Boarding passes, baggage handling",
       },
       {
         title: "Customer Service",
-        description: "Passenger assistance, query resolution, and service excellence",
+        description: "Passenger assistance, complaint handling",
       },
       {
         title: "Aviation Security",
-        description: "Security protocols, screening procedures, and threat assessment",
+        description: "Screening, safety checks, compliance",
       },
       {
         title: "Cargo Operations",
-        description: "Freight handling, documentation, and logistics coordination",
+        description: "Documentation, customs, special cargo",
       },
       {
         title: "Emergency Response",
-        description: "Crisis management, evacuation procedures, and first aid",
+        description: "Evacuations, firefighting, first aid",
       },
     ],
     careerPaths: [
       "Check-in Agent",
-      "Baggage Handler",
       "Security Officer",
-      "Customer Service Agent",
       "Cargo Executive",
       "Ramp Agent",
+      "Customer Service Executive",
+      "Baggage Handler",
     ],
     mentorship: "One-to-One Mentorship",
     placement: "100% Placement Assistance",
@@ -201,59 +204,60 @@ export const courses: Course[] = [
   {
     id: "4",
     title: "Travel & Tourism Management",
-    slug: "travel-tourism",
+    slug: "travel-tourism-management",
     description:
-      "Comprehensive program covering travel planning, tour operations, tourism industry management, and destination knowledge for travel professionals.",
+      "If travel excites you, why not turn it into a career? The global tourism industry is booming, and skilled professionals are always in demand. Our 6-month Travel & Tourism Management Course prepares you to design tours, manage travel services, and create memorable experiences for clients.",
     category: "Tourism",
     duration: "6 Months",
     classesPerDay: "2 hours",
-    practicalHours: "45 hours",
-    certification: "Industry Certified",
-    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
+    practicalHours: "45+ hours",
+    certification: "Industry-recognized",
+    image:
+      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
     icon: Globe,
     eligibility: [
       "12th Pass from recognized board",
       "Age between 18-35 years",
-      "Good communication skills",
-      "Interest in travel and cultures",
+      "Good English communication",
+      "Interest in travel, culture, destinations",
       "Basic geography knowledge",
     ],
     syllabus: [
       {
-        title: "Tourism Industry Overview",
-        description: "Understanding tourism sectors, market trends, and career opportunities",
+        title: "Tourism Industry Basics",
+        description: "Career scope, global trends",
       },
       {
         title: "Travel Planning & Booking",
-        description: "Itinerary planning, reservation systems, and booking procedures",
+        description: "Airline, hotel, transport reservations",
       },
       {
         title: "Tour Operations",
-        description: "Tour packaging, guide services, and group management",
+        description: "Group tours, package design, coordination",
       },
       {
         title: "Destination Knowledge",
-        description: "Geography, culture, attractions, and travel requirements",
+        description: "Geography, cultures, documentation",
       },
       {
         title: "Travel Technology",
-        description: "GDS systems, online booking platforms, and travel software",
+        description: "GDS (Amadeus, Sabre, Galileo), booking tools",
       },
       {
         title: "Customer Relations",
-        description: "Client consultation, service delivery, and relationship management",
+        description: "Handling queries, service excellence",
       },
     ],
     careerPaths: [
       "Travel Consultant",
       "Tour Operator",
       "Travel Agent",
+      "Destination Specialist",
       "Tour Guide",
       "Travel Coordinator",
-      "Destination Specialist",
     ],
     mentorship: "One-to-One Mentorship",
     placement: "100% Placement Assistance",
     support: "24/7 Student Support",
   },
-]
+];

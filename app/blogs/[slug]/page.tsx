@@ -69,7 +69,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   const currentUrl =
     typeof window !== "undefined"
       ? window.location.href
-      : `https://your-blog-domain.com/blog/${post.slug}`;
+      : `https://your-blog-domain.com/blogs/${post.slug}`;
 
   return (
     <ErrorBoundary>
@@ -77,6 +77,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <BlogStructuredData post={post} url={currentUrl} />
 
         <ReadingProgress />
+
+        
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <Breadcrumbs post={post} />
