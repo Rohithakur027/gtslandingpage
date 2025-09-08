@@ -85,7 +85,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
           <article className="prose prose-lg max-w-none">
             <div className="flex items-center justify-between my-8">
-              <SocialShare post={post} />
+              {/* <SocialShare post={post} /> */}
             </div>
 
             <BlogContent post={post} />

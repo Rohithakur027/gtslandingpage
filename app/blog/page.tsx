@@ -108,7 +108,7 @@ export default function AviationBlogPage() {
         {/* SEO structured data for search engines */}
         <BlogListStructuredData
           posts={allPosts}
-          url={typeof window !== "undefined" ? window.location.origin : "https://skywings-aviation.com"}
+          url={typeof window !== "undefined" ? window.location.origin : "https://groundtosky.in/"}
         />
 
         {/* Aviation academy header with branding */}

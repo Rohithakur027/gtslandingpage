@@ -50,10 +50,10 @@ export default function Navigation() {
             Courses
           </Link>
           <Link
-            href="#faqsection"
+            href="/blog"
             className="text-slate-600 hover:text-[#796efd] transition-colors whitespace-nowrap"
           >
-            About Us
+            Blogs
           </Link>
           <Link
             href="#placements"

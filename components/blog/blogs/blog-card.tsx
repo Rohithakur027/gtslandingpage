@@ -20,7 +20,7 @@ export function BlogCard({ post }: BlogCardProps) {
     <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-0 shadow-md overflow-hidden">
       {/* Featured Image */}
       <div className="relative overflow-hidden">
-        <Link href={`/blog/${post.slug}`}>
+        <Link href={`/blogs/${post.slug}`}>
           <Image
             src={post.featuredImage || "/placeholder.svg"}
             alt={post.featuredImageAlt}

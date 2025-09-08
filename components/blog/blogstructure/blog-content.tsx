@@ -85,7 +85,7 @@ export function BlogContent({ post }: BlogContentProps) {
           <h3 className="text-2xl font-bold text-foreground">{post.callToAction.title}</h3>
           <p className="text-muted-foreground">{post.callToAction.description}</p>
           <Button asChild size="lg">
-            <Link href={post.callToAction.buttonLink}>{post.callToAction.buttonText}</Link>
+            <Link href= "https://groundtosky.in/contact">{post.callToAction.buttonText}</Link>
           </Button>
         </CardContent>
       </Card>
