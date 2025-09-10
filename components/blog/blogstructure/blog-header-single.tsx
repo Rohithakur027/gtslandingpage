@@ -1,10 +1,10 @@
-import Image from "next/image"
-import { BlogPost } from "@/types/blogType"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, User } from "lucide-react"
+import Image from "next/image";
+import { BlogPost } from "@/types/blogType";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, Clock, User } from "lucide-react";
 
 interface BlogHeaderProps {
-  post: BlogPost
+  post: BlogPost;
 }
 
 export function BlogHeader({ post }: BlogHeaderProps) {
@@ -12,7 +12,7 @@ export function BlogHeader({ post }: BlogHeaderProps) {
     year: "numeric",
     month: "long",
     day: "numeric",
-  })
+  });
 
   return (
     <header className="mb-8">
@@ -24,7 +24,9 @@ export function BlogHeader({ post }: BlogHeaderProps) {
         ))}
       </div>
 
-      <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">{post.hero.title}</h1>
+      <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
+        {post.hero.title}
+      </h1>
 
       <div className="flex flex-wrap items-center gap-6 text-muted-foreground mb-8">
         <div className="flex items-center gap-2">
@@ -63,5 +65,5 @@ export function BlogHeader({ post }: BlogHeaderProps) {
         />
       </div>
     </header>
-  )
+  );
 }

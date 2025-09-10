@@ -13,7 +13,7 @@ import { BlogStructuredData } from "@/components/blog/seo/blog-structured-data";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { ReadingProgress } from "@/components/blog/blogstructure/reading-progress";
-
+import { BlogHeader } from "@/components/blog/blogstructure/blog-header-single";
 interface BlogPostPageProps {
   params: {
     slug: string;
@@ -78,10 +78,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
 
         <ReadingProgress />
 
-        
-
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <Breadcrumbs post={post} />
+          <BlogHeader post={post} />
 
           <article className="prose prose-lg max-w-none">
             <div className="flex items-center justify-between my-8">

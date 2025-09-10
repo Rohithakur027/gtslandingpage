@@ -1,11 +1,12 @@
-import Image from "next/image"
-import { BlogPost } from "@/types/blogType"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import Image from "next/image";
+import { BlogPost } from "@/types/blogType";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { parseTextWithLinks } from "@/components/linkparser";
 
 interface BlogContentProps {
-  post: BlogPost
+  post: BlogPost;
 }
 
 export function BlogContent({ post }: BlogContentProps) {
@@ -19,7 +20,9 @@ export function BlogContent({ post }: BlogContentProps) {
       {/* Main Sections */}
       {post.sections.map((section) => (
         <section key={section.id} className="space-y-6">
-          <h2 className="text-3xl font-bold text-foreground mb-4">{section.heading}</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-4">
+            {section.heading}
+          </h2>
 
           {section.image && (
             <div className="relative aspect-video w-full overflow-hidden rounded-lg my-6">
@@ -35,11 +38,13 @@ export function BlogContent({ post }: BlogContentProps) {
 
           {section.subSections.map((subSection) => (
             <div key={subSection.id} className="space-y-4">
-              <h3 className="text-2xl font-semibold text-foreground">{subSection.subHeading}</h3>
+              <h3 className="text-2xl font-semibold text-foreground">
+                {subSection.subHeading}
+              </h3>
 
               {subSection.paragraphs.map((paragraph, index) => (
                 <p key={index} className="text-foreground leading-relaxed">
-                  {paragraph}
+                  {parseTextWithLinks(paragraph)}
                 </p>
               ))}
 
@@ -47,7 +52,9 @@ export function BlogContent({ post }: BlogContentProps) {
                 <Card className="bg-muted">
                   <CardContent className="p-4">
                     <pre className="text-sm overflow-x-auto">
-                      <code className="language-{subSection.codeSnippet.language}">{subSection.codeSnippet.code}</code>
+                      <code className="language-{subSection.codeSnippet.language}">
+                        {subSection.codeSnippet.code}
+                      </code>
                     </pre>
                   </CardContent>
                 </Card>
@@ -55,7 +62,9 @@ export function BlogContent({ post }: BlogContentProps) {
 
               {subSection.quote && (
                 <blockquote className="border-l-4 border-primary pl-6 py-4 bg-muted/50 rounded-r-lg">
-                  <p className="text-lg italic text-foreground">{subSection.quote}</p>
+                  <p className="text-lg italic text-foreground">
+                    {subSection.quote}
+                  </p>
                 </blockquote>
               )}
 
@@ -82,13 +91,19 @@ export function BlogContent({ post }: BlogContentProps) {
       {/* Call to Action */}
       <Card className="bg-primary/5 border-primary/20">
         <CardContent className="p-8 text-center space-y-4">
-          <h3 className="text-2xl font-bold text-foreground">{post.callToAction.title}</h3>
-          <p className="text-muted-foreground">{post.callToAction.description}</p>
+          <h3 className="text-2xl font-bold text-foreground">
+            {post.callToAction.title}
+          </h3>
+          <p className="text-muted-foreground">
+            {post.callToAction.description}
+          </p>
           <Button asChild size="lg">
-            <Link href= "https://groundtosky.in/contact">{post.callToAction.buttonText}</Link>
+            <Link href="https://groundtosky.in/contact">
+              {post.callToAction.buttonText}
+            </Link>
           </Button>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

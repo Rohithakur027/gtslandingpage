@@ -42,7 +42,7 @@ export const blogPosts: BlogPost[] = [
     hero: {
       title:
         "Best Cabin Crew Courses – Your Companion to Soaring in the Aviation Industry",
-      featuredImage: "/images/blogImages/blog01/image01.jpg",
+      featuredImage: "/images/blogImages/blog01/image02.jpg",
       featuredImageAlt: "Cabin crew trainees practicing in mock aircraft cabin",
     },
     introduction:
