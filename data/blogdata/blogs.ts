@@ -42,11 +42,11 @@ export const blogPosts: BlogPost[] = [
     hero: {
       title:
         "Best Cabin Crew Courses – Your Companion to Soaring in the Aviation Industry",
-      featuredImage: "/images/blogImages/blog01/image02.jpg",
+      featuredImage: "/images/blogImages/blog01/image01.jpg",
       featuredImageAlt: "Cabin crew trainees practicing in mock aircraft cabin",
     },
     introduction:
-      "Aeronautical assistance is one of the most dynamic and rewarding career fields, with cabin crew roles at the forefront of aviation’s growth. As air travel continues to surge, the need for highly trained professionals who ensure passenger comfort and safety is greater than ever. If you dream of walking the aircraft aisle in uniform, choosing the right cabin crew course is crucial for launching a successful career.",
+      "Aeronautical assistance is one of the most dynamic and rewarding career fields, with cabin crew roles at the forefront of aviation’s growth. As air travel continues to surge, the need for highly trained professionals who ensure passenger comfort and safety is greater than ever. If you dream of walking the aircraft aisle in uniform, choosing the right [cabin crew course](/) is crucial for launching a successful career.",
     sections: [
       {
         id: "section-1",
@@ -211,15 +211,15 @@ export const blogPosts: BlogPost[] = [
             id: "subsection-4-1",
             subHeading: "Conclusion",
             paragraphs: [
-              "Choosing the right cabin crew course — backed by expert instructors, real-world practice, and strong career support — is the key to a rewarding journey in aviation.",
-              "Ground to Sky Aviation Training Institute gives you the confidence and training to succeed in one of the world’s most exciting industries and truly soar above the rest.",
+              "Choosing the right [cabin crew course](/) — backed by expert instructors, real-world practice, and strong career support — is the key to a rewarding journey in aviation.",
+              "[Ground to Sky ](/)Aviation Training Institute gives you the confidence and training to succeed in one of the world’s most exciting industries and truly soar above the rest.",
             ],
           },
         ],
       },
     ],
     conclusion:
-      "The best cabin crew courses combine practical skill-building, accredited instruction, soft skills, and strong career support. As the aviation sector grows, certified cabin crew professionals remain in high demand. Start your journey at the right institute, and unlock a career full of adventure, responsibility, and lifelong learning.",
+      "The [best cabin crew courses]() combine practical skill-building, accredited instruction, soft skills, and strong career support. As the aviation sector grows, certified cabin crew professionals remain in high demand. Start your journey at the right institute, and unlock a career full of adventure, responsibility, and lifelong learning.",
     callToAction: {
       title: "Take Flight with Ground to Sky Aviation Training Institute",
       description:
