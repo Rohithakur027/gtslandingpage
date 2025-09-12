@@ -8,13 +8,14 @@ export const blogPosts: BlogPost[] = [
     slug: "best-cabin-crew-courses-india-guide",
     author: {
       id: "author-2",
-      name: "Rose Rajakumari",
-      bio: "Former lead cabin crew trainer and DGCA-certified aviation consultant with 15+ years of experience mentoring future flight attendants across India. Expert in curriculum development and soft skills training for cabin crew.",
-      avatar: "/aviation-training-expert-avatar.png",
+      name: "Rose Rajkumari",
+      bio: "Former lead cabin crew trainer and DGCA-certified aviation consultant with 15+ years of experience mentoring future flight attendants across India. Expert in curriculum development and soft skills training for cabin crew, ground staff and hospitality retail.",
+      avatar: "/images/rose.jpg",
       socialLinks: {
-        thread: "https://twitter.com/captainrajiv",
-        linkedin: "https://linkedin.com/in/rajivsharma",
-        instagram: "https://instagram.com/aviationmentor",
+        thread: "https://www.facebook.com/share/1GXhQNXf95/?mibextid=wwXIfr",
+        linkedin: "https://www.linkedin.com/in/rose-rajkumari-3072782",
+        instagram:
+          "https://www.instagram.com/rose.rajkumari?igsh=bGhydWtpcW9pbDd4&utm_source=qr",
       },
     },
     publishDate: "2025-09-08",
