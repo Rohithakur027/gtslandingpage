@@ -66,7 +66,7 @@ export default function RootLayout({
       </head>
       <body>
         <GoogleTagManager gtmId="GTM-WX5DTG84" />
-        <GoogleAnalytics gaId="G-VGDWDBY3PG" />
+        <GoogleAnalytics gaId="G-PH97TZDLK0" />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
