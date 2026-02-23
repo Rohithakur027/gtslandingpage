@@ -9,9 +9,9 @@ import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: "Air Hostess training in Delhi & Cabin Crew Course Delhi | Ground Staff Training India",
-  description:"Top Air Hostess Training in Delhi near Janakpuri Metro. Cabin Crew Course in Delhi, Ground Staff & Airport Operation courses in Delhi with grooming & placement support."
-    ,
-    keywords : "Air Hostess Training Delhi, Cabin Crew Course Delhi, Professional Cabin Crew Course India, Ground Staff Training India, Airport Operations Course Delhi, Air Hostess Course with Placement, Spoken English Cabin Crew Delhi, Personal Grooming Flight Attendants, Mock Interview Airlines Delhi, Janakpuri Cabin Crew Academy, Near Janakpuri Metro Air Hostess, Aviation Hospitality Training Delhi",
+  description: "Top Air Hostess Training in Delhi near Janakpuri Metro. Cabin Crew Course in Delhi, Ground Staff & Airport Operation courses in Delhi with grooming & placement support."
+  ,
+  keywords: "Air Hostess Training Delhi, Cabin Crew Course Delhi, Professional Cabin Crew Course India, Ground Staff Training India, Airport Operations Course Delhi, Air Hostess Course with Placement, Spoken English Cabin Crew Delhi, Personal Grooming Flight Attendants, Mock Interview Airlines Delhi, Janakpuri Cabin Crew Academy, Near Janakpuri Metro Air Hostess, Aviation Hospitality Training Delhi",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* google adword conversion tracking */}
-          <Script
+        <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=AW-17452776636"
           strategy="afterInteractive"
@@ -54,7 +54,7 @@ export default function RootLayout({
           }}
         />
 
-        
+
         <noscript>
           <img
             height="1"
@@ -65,8 +65,8 @@ export default function RootLayout({
         </noscript>
       </head>
       <body>
-        <GoogleTagManager gtmId="GTM-KDWXFFLN" />
-         <GoogleAnalytics gaId="G-VGDWDBY3PG" />
+        <GoogleTagManager gtmId="GTM-WX5DTG84" />
+        <GoogleAnalytics gaId="G-VGDWDBY3PG" />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
