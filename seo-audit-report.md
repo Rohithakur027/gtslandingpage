@@ -60,7 +60,7 @@ The site has undergone significant improvements since the previous audit (Feb 20
 
 ### 1.3 Meta Descriptions
 
-| Page | Status | Notes |
+| Page | Status | Notes | 
 |------|--------|-------|
 | `/` | ✅ GOOD | Includes keywords + CTA |
 | `/courses` | ✅ GOOD | Descriptive, includes location |
