@@ -24,10 +24,10 @@ export function BlogStructuredData({ post, url }: BlogStructuredDataProps) {
     },
     publisher: {
       "@type": "Organization",
-      name: "Modern Blog",
+      name: "Ground to Sky Academy",
       logo: {
         "@type": "ImageObject",
-        url: "/logo.png",
+        url: "https://groundtosky.in/images/GTS-Logo.png",
       },
     },
     mainEntityOfPage: {

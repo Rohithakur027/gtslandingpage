@@ -10,6 +10,7 @@ import { SocialShare } from "@/components/blog/blogstructure/socialshare";
 import { Breadcrumbs } from "@/components/blog/blogstructure/breadcrumbs";
 
 import { BlogStructuredData } from "@/components/blog/seo/blog-structured-data";
+import BreadcrumbSchema from "@/components/breadcrumb-schema";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { ReadingProgress } from "@/components/blog/blogstructure/reading-progress";
@@ -36,6 +37,9 @@ export async function generateMetadata({
     description: post.metaDescription,
     keywords: post.keywords.join(", "),
     authors: [{ name: post.author.name }],
+    alternates: {
+      canonical: `https://groundtosky.in/blog/${params.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.metaDescription,
@@ -69,12 +73,19 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   const currentUrl =
     typeof window !== "undefined"
       ? window.location.href
-      : `https://your-blog-domain.com/blogs/${post.slug}`;
+      : `https://groundtosky.in/blog/${post.slug}`;
 
   return (
     <ErrorBoundary>
       <div className="min-h-screen bg-background">
         <BlogStructuredData post={post} url={currentUrl} />
+        <BreadcrumbSchema
+          items={[
+            { name: "Home", url: "https://groundtosky.in" },
+            { name: "Blog", url: "https://groundtosky.in/blog" },
+            { name: post.title, url: `https://groundtosky.in/blog/${post.slug}` },
+          ]}
+        />
 
         <ReadingProgress />
 

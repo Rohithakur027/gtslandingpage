@@ -12,11 +12,7 @@ import {
 import Link from "next/link";
 import VideoSection from "./videosection";
 
-interface HeroSectionProps {
-  isVisible?: boolean;
-}
-
-export default function HeroSection({ isVisible = true }: HeroSectionProps) {
+export default function HeroSection() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -96,12 +92,12 @@ export default function HeroSection({ isVisible = true }: HeroSectionProps) {
 
             <div className="space-y-5">
               <h1 className={`text-3xl md:text-4xl lg:text-5xl font-bold ${isMobile ? 'text-gray-900' : 'text-white'} leading-tight`}>
-                Soar High with{" "}
+                Best Air Hostess &amp;{" "}
                 <span className={`block ${isMobile ? 'text-blue-600' : 'text-blue-400'} relative`}>
-                  GTS Academy
+                  Cabin Crew Training
                   <div className={`absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r ${isMobile ? 'from-blue-600 to-green-600' : 'from-blue-400 to-green-400'} rounded-full`}></div>
                 </span>
-                <span className="block">Become An Accomplished Cabin Crew</span>
+                <span className="block">Academy in Delhi</span>
               </h1>
 
               <p className={`text-base md:text-lg ${isMobile ? 'text-gray-700' : 'text-white/90'} leading-relaxed max-w-lg`}>

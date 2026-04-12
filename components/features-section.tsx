@@ -28,7 +28,7 @@ export default function FeaturesSection() {
                 <Plane className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-lg font-bold text-[#032789] mb-4">
-                100% Placement Assitance
+                100% Placement Assistance
               </h3>
               <p className="text-sm text-slate-600">
                 100% placement assistance in top airlines and hospitality brands

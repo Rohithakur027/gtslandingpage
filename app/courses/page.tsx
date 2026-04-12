@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,27 @@ import { Badge } from "@/components/ui/badge";
 import { Clock, Award, ChevronRight } from "lucide-react";
 import { courses } from "@/data/coursesdata";
 import Navigation from "@/components/navigation";
+
+export const metadata: Metadata = {
+  title: "Aviation & Hospitality Courses in Delhi | Ground to Sky Academy",
+  description:
+    "Explore air hostess training, cabin crew, airport ground staff, hotel management & travel tourism courses at Ground to Sky Academy, Janakpuri, Delhi. 100% placement assistance. Admissions open!",
+  alternates: { canonical: "https://groundtosky.in/courses" },
+  openGraph: {
+    title: "Aviation & Hospitality Courses in Delhi | Ground to Sky Academy",
+    description:
+      "Professional aviation & hospitality courses at Ground to Sky Academy, Janakpuri, Delhi. Air hostess, cabin crew, ground staff & hotel management programs with placement support.",
+    url: "https://groundtosky.in/courses",
+    siteName: "Ground to Sky Academy",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aviation & Hospitality Courses in Delhi | Ground to Sky Academy",
+    description:
+      "Professional aviation & hospitality courses with 100% placement assistance at Ground to Sky Academy, Delhi.",
+  },
+};
 
 export default function CoursesPage() {
   return (
@@ -20,7 +42,7 @@ export default function CoursesPage() {
             Our Programs
           </Badge>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
-            Professional Aviation & Hospitality Courses
+            Aviation &amp; Hospitality Courses in Delhi
           </h1>
           <p className="text-gray-600 max-w-4xl mx-auto text-lg">
             Choose from our comprehensive range of industry-focused courses
@@ -36,7 +58,7 @@ export default function CoursesPage() {
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src={course.image || "/placeholder.svg"}
-                    alt={course.title}
+                    alt={`${course.title} training in Delhi — Ground to Sky Academy`}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                   />

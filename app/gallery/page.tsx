@@ -18,59 +18,59 @@ interface GalleryImage {
 const galleryImages: GalleryImage[] = [
   {
     id: "1",
-    src: "/images/gallery/training-1.jpg",
-    alt: "Air hostess training session",
+    src: "/images/training/01.webp",
+    alt: "Personal grooming session at Ground to Sky Academy",
     category: "Training",
-    description: "Students practicing in-flight service procedures",
+    description: "Students practicing professional grooming and etiquette",
   },
   {
     id: "2",
-    src: "/images/gallery/graduation-1.jpg",
-    alt: "Graduation ceremony",
-    category: "Events",
-    description: "Proud graduates receiving their certificates",
+    src: "/images/training/02.webp",
+    alt: "Mock interview practice for cabin crew",
+    category: "Training",
+    description: "Students preparing for airline interview processes",
   },
   {
     id: "3",
-    src: "/images/gallery/facilities-1.jpg",
-    alt: "Academy facilities",
-    category: "Facilities",
-    description: "State-of-the-art training facilities",
+    src: "/images/training/03.webp",
+    alt: "In-flight service training at GTS Academy",
+    category: "Training",
+    description: "Hands-on in-flight service training session",
   },
   {
     id: "4",
-    src: "/images/gallery/workshop-1.jpg",
-    alt: "Industry workshop",
-    category: "Events",
-    description: "Industry experts conducting workshops",
+    src: "/images/training/04.webp",
+    alt: "Safety demonstration class",
+    category: "Training",
+    description: "Students learning emergency safety procedures",
   },
   {
     id: "5",
-    src: "/images/gallery/training-2.jpg",
-    alt: "Grooming session",
+    src: "/images/training/05.webp",
+    alt: "Spoken English class for aviation students",
     category: "Training",
-    description: "Professional grooming and etiquette training",
+    description: "English language and communication training",
   },
   {
     id: "6",
-    src: "/images/gallery/campus-1.jpg",
-    alt: "Campus life",
-    category: "Campus",
-    description: "Students enjoying campus activities",
+    src: "/images/training/08.webp",
+    alt: "Aircraft cabin mock-up training",
+    category: "Facilities",
+    description: "Realistic aircraft cabin for practical training",
   },
   {
     id: "7",
-    src: "/images/gallery/placement-1.jpg",
-    alt: "Placement drive",
-    category: "Events",
-    description: "Students participating in placement interviews",
+    src: "/images/training/09.webp",
+    alt: "Emergency procedures drill at GTS Academy",
+    category: "Training",
+    description: "Students participating in emergency evacuation drills",
   },
   {
     id: "8",
-    src: "/images/gallery/facilities-2.jpg",
-    alt: "Mock aircraft cabin",
-    category: "Facilities",
-    description: "Realistic aircraft cabin for practical training",
+    src: "/images/training/13.webp",
+    alt: "Team building activities at Ground to Sky Academy",
+    category: "Campus",
+    description: "Students enjoying team building and campus activities",
   },
 ];
 
@@ -114,7 +114,7 @@ export default function GalleryPage() {
           Our Gallery
         </Badge>
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
-          Life at Ground to sky Academy
+          Training Life at Ground to Sky Academy, Delhi
         </h1>
         <p className="text-gray-600 max-w-3xl mx-auto text-lg">
           Explore our vibrant campus life, world-class facilities, and memorable

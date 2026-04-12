@@ -16,7 +16,7 @@ export default function Navigation() {
           <Link href="/">
             <Image
               src={logo}
-              alt="Logo"
+              alt="Ground to Sky Academy"
               width={80}
               height={80}
               className="flex-shrink-0"
@@ -74,7 +74,7 @@ export default function Navigation() {
           {/* Phone shown only on mobile */}
           <div className="flex items-center space-x-2 text-sm text-slate-600 sm:hidden">
             <Phone className="w-4 h-4" />
-            <a href="tel:+911234567890" className="whitespace-nowrap">
+            <a href="tel:+919560002923" className="whitespace-nowrap">
               +91 95600 02923
             </a>
           </div>
@@ -82,7 +82,7 @@ export default function Navigation() {
           {/* Phone on md+ */}
           <div className="hidden md:flex items-center space-x-2 text-sm text-slate-600 whitespace-nowrap">
             <Phone className="w-4 h-4" />
-            <a href="tel:+911234567890">+91 95600 02923</a>
+            <a href="tel:+919560002923">+91 95600 02923</a>
           </div>
 
           {/* Enroll Now button */}

@@ -12,17 +12,17 @@ export function BlogListStructuredData({ posts, url }: BlogListStructuredDataPro
     "@type": "Blog",
     "@id": url,
     mainEntityOfPage: url,
-    name: "Modern Blog - Insights & Tutorials",
+    name: "Ground to Sky Academy - Aviation Career Blog",
     description:
-      "Discover the latest insights, tutorials, and best practices in web development, design, and technology.",
+      "Expert tips, guides, and insights on aviation careers, cabin crew training, air hostess courses, and hospitality industry from Ground to Sky Academy Delhi.",
     url: url,
-    image: "/og-image.png",
+    image: "https://groundtosky.in/images/GTS-Logo.png",
     publisher: {
       "@type": "Organization",
-      name: "Modern Blog",
+      name: "Ground to Sky Academy",
       logo: {
         "@type": "ImageObject",
-        url: "/logo.png",
+        url: "https://groundtosky.in/images/GTS-Logo.png",
       },
     },
     blogPost: posts.slice(0, 10).map((post) => ({

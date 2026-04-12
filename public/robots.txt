@@ -1,9 +1,10 @@
-# *
 User-agent: *
 Allow: /
+Disallow: /thank-you
+Disallow: /thankyou
 
 # Host
-Host: https://groundtosky.in/
+Host: https://groundtosky.in
 
 # Sitemaps
 Sitemap: https://groundtosky.in/sitemap.xml

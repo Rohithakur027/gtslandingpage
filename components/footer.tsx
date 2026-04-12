@@ -31,22 +31,20 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <Link
-                href="#"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
-                <Twitter className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-slate-400 hover:text-white transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
+                href="https://www.instagram.com/rose.rajkumari"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors"
               >
                 <Instagram className="w-5 h-5" />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/rose-rajkumari-3072782"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-white transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
               </Link>
             </div>
           </div>
@@ -55,38 +53,72 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Courses</h4>
             <ul className="space-y-2 text-slate-400">
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
+                <Link
+                  href="/courses/air-hostess-training"
+                  className="hover:text-white transition-colors"
+                >
                   Air Hostess Training
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
+                <Link
+                  href="/courses/airport-ground-staff"
+                  className="hover:text-white transition-colors"
+                >
                   Ground Staff Training
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
-                  Hospitality & Retail
+                <Link
+                  href="/courses/hotel-operations-management"
+                  className="hover:text-white transition-colors"
+                >
+                  Hotel Management
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/courses/travel-tourism-management"
+                  className="hover:text-white transition-colors"
+                >
+                  Travel & Tourism
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4">Company</h4>
+            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-slate-400">
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
-                  About Us
+                <Link
+                  href="/courses"
+                  className="hover:text-white transition-colors"
+                >
+                  All Courses
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
-                  Placements
+                <Link
+                  href="/blog"
+                  className="hover:text-white transition-colors"
+                >
+                  Blog
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-white transition-colors">
+                <Link
+                  href="/gallery"
+                  className="hover:text-white transition-colors"
+                >
+                  Gallery
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="hover:text-white transition-colors"
+                >
                   Contact
                 </Link>
               </li>
@@ -98,7 +130,7 @@ export default function Footer() {
             <ul className="space-y-2 text-slate-400">
               <li className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
-                <a href="tel:+911234567890">+91 95600 02923</a>
+                <a href="tel:+919560002923">+91 95600 02923</a>
               </li>
               <li className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
@@ -106,7 +138,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2" />
-                <span>Delhi</span>
+                <span>Janakpuri, New Delhi</span>
               </li>
             </ul>
           </div>
@@ -115,18 +147,21 @@ export default function Footer() {
         <div className="border-t border-slate-700 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-slate-400 text-sm">
-              © {new Date().getFullYear()} Ground to Sky Academy. All rights
-              reserved.
+              &copy; {new Date().getFullYear()} Ground to Sky Academy. All
+              rights reserved.
             </p>
             <div className="flex space-x-6 text-sm text-slate-400 mt-4 md:mt-0">
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link
+                href="/privacy-policy"
+                className="hover:text-white transition-colors"
+              >
                 Privacy Policy
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link
+                href="/terms-of-service"
+                className="hover:text-white transition-colors"
+              >
                 Terms of Service
-              </Link>
-              <Link href="#" className="hover:text-white transition-colors">
-                Cookie Policy
               </Link>
             </div>
           </div>

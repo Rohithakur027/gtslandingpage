@@ -34,9 +34,9 @@ export default function ClientLayout({
   }
 
   return (
-    <body>
+    <div id="main-content">
       {children}
       <CounselingPopup isOpen={showPopup} onClose={handleClosePopup} />
-    </body>
+    </div>
   )
 }

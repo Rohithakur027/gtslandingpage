@@ -112,7 +112,7 @@ export default function ApplyPage() {
     try {
       await submitToGoogleSheets(formData);
       // Redirect to thank-you page on success
-      router.push("/thankyou"); // replace with your actual thank-you page route
+      router.push("/thank-you"); // replace with your actual thank-you page route
       return;
     } catch (error) {
       setSubmitError(
@@ -132,9 +132,11 @@ export default function ApplyPage() {
       <div className="w-full px-4 md:px-8 lg:px-16 xl:px-24 py-12 md:py-24 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <Badge className="mb-4 bg-accent text-white border-0">Start Your Journey</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary">Contact us</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
+            Contact Ground to Sky Academy
+          </h1>
           <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-            Take the first step towards your dream career in aviation and hospitality by applying to Ground to Sky Academy.
+            Take the first step towards your dream career in aviation and hospitality. Fill in the form below or reach us directly.
           </p>
         </div>
 
@@ -213,6 +215,67 @@ export default function ApplyPage() {
             </div>
           </form>
         </Card>
+
+        {/* Contact information section */}
+        <div className="max-w-2xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h3 className="text-lg font-bold text-primary mb-3">Visit Us</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Ground to Sky Academy<br />
+              Janakpuri, West Delhi<br />
+              New Delhi - 110058<br />
+              (Near Janakpuri West Metro Station)
+            </p>
+          </div>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h3 className="text-lg font-bold text-primary mb-3">Reach Out</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              <strong>Phone:</strong>{" "}
+              <a href="tel:+919560002923" className="text-[#796efd] hover:underline">
+                +91 95600 02923
+              </a>
+              <br />
+              <strong>Email:</strong> hello@groundtosky.in<br />
+              <strong>Office Hours:</strong> Mon – Sat, 9:00 AM – 6:00 PM
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-2xl mx-auto mt-8 text-center">
+          <p className="text-gray-500 text-sm">
+            Our admissions counselors are available to help you choose the right aviation or hospitality course. Walk-ins welcome during office hours.
+          </p>
+        </div>
+
+        {/* How to Reach Us */}
+        <div className="max-w-2xl mx-auto mt-12">
+          <h2 className="text-2xl font-bold text-primary mb-4">How to Reach Ground to Sky Academy</h2>
+          <p className="text-gray-600 text-sm leading-relaxed mb-6">
+            Ground to Sky Academy is conveniently located in Janakpuri, West Delhi — one of the most well-connected areas in the capital. Whether you are coming by metro, bus, or car, reaching us is easy.
+          </p>
+          <ul className="text-gray-600 text-sm space-y-2 mb-6 list-disc list-inside">
+            <li><strong>By Metro:</strong> Get down at Janakpuri West Metro Station (Blue Line). The academy is a short walk from the station.</li>
+            <li><strong>By Bus:</strong> Multiple DTC and cluster bus routes connect Janakpuri to all parts of Delhi and NCR.</li>
+            <li><strong>By Car:</strong> Janakpuri is accessible via Pankha Road and the Janakpuri District Centre area. Parking is available nearby.</li>
+          </ul>
+          <p className="text-gray-600 text-sm leading-relaxed mb-6">
+            When you visit, our team will give you a tour of the training facilities, explain course details, and help you understand the admission process. No appointment is needed during office hours (Monday to Saturday, 9:00 AM – 6:00 PM).
+          </p>
+
+          {/* Google Maps Embed */}
+          <div className="rounded-lg overflow-hidden shadow-md">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.0!2d77.0878!3d28.6219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sJanakpuri%2C+New+Delhi!5e0!3m2!1sen!2sin!4v1700000000000"
+              width="100%"
+              height="300"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Ground to Sky Academy Location - Janakpuri, New Delhi"
+            ></iframe>
+          </div>
+        </div>
       </div>
     </>
   );

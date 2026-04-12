@@ -75,7 +75,7 @@ export default function CounselingPopup({
     try {
       await submitToGoogleSheets(formData);
       // Redirect to thank-you page on success
-      router.push("/thankyou");
+      router.push("/thank-you");
       // Reset form and close popup
       setFormData({ name: "", phone: "", message: "" });
       setSubmitError("");

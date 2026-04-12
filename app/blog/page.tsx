@@ -115,6 +115,13 @@ export default function AviationBlogPage() {
         <Navigation/>
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+            Aviation Career Blog — Tips &amp; Guides from Delhi&apos;s Top Institute
+          </h1>
+          <p className="text-muted-foreground mb-8 text-lg">
+            Expert tips, guides &amp; industry insights on cabin crew careers, air hostess training, and aviation jobs in India.
+          </p>
+
           {/* Search and filter controls */}
           <BlogSearchFilters
             filters={filters}

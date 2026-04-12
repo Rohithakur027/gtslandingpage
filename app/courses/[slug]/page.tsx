@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -7,11 +8,48 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Clock, Users, Award, CheckCircle, TrendingUp } from "lucide-react";
 import { courses } from "@/data/coursesdata";
+import CourseSchema from "@/components/course-schema";
+import BreadcrumbSchema from "@/components/breadcrumb-schema";
 
 interface CoursePageProps {
   params: {
     slug: string;
   };
+}
+
+export async function generateMetadata({
+  params,
+}: CoursePageProps): Promise<Metadata> {
+  const course = courses.find((c) => c.slug === params.slug);
+
+  if (!course) {
+    return { title: "Course Not Found" };
+  }
+
+  return {
+    title: `${course.title} in Delhi | Ground to Sky Academy`,
+    description: `Enroll in ${course.title} at Ground to Sky Academy, Janakpuri, Delhi. ${course.duration} program with ${course.practicalHours} practical training & 100% placement assistance. Admissions open!`,
+    alternates: {
+      canonical: `https://groundtosky.in/courses/${params.slug}`,
+    },
+    openGraph: {
+      title: `${course.title} in Delhi | Ground to Sky Academy`,
+      description: `Professional ${course.title} at Ground to Sky Academy, Janakpuri, Delhi. ${course.duration} duration with 100% placement support.`,
+      url: `https://groundtosky.in/courses/${params.slug}`,
+      siteName: "Ground to Sky Academy",
+      type: "website",
+      images: course.image ? [{ url: `https://groundtosky.in${course.image}`, alt: `${course.title} training at Ground to Sky Academy Delhi` }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${course.title} in Delhi | Ground to Sky Academy`,
+      description: `Join ${course.title} at Ground to Sky Academy, Delhi. ${course.duration} with 100% placement assistance.`,
+    },
+  };
+}
+
+export function generateStaticParams() {
+  return courses.map((course) => ({ slug: course.slug }));
 }
 
 export default function CoursePage({ params }: CoursePageProps) {
@@ -23,6 +61,14 @@ export default function CoursePage({ params }: CoursePageProps) {
 
   return (
     <div className="container px-4 py-12 md:px-6 md:py-24">
+      <CourseSchema course={course} />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://groundtosky.in" },
+          { name: "Courses", url: "https://groundtosky.in/courses" },
+          { name: course.title, url: `https://groundtosky.in/courses/${course.slug}` },
+        ]}
+      />
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2 space-y-8">
           <div>
@@ -40,7 +86,7 @@ export default function CoursePage({ params }: CoursePageProps) {
           <div className="relative h-64 md:h-80 rounded-lg overflow-hidden">
             <Image
               src={course.image || "/placeholder.svg"}
-              alt={course.title}
+              alt={`${course.title} training session at Ground to Sky Academy, Janakpuri, Delhi`}
               fill
               className="object-cover"
             />
@@ -165,7 +211,7 @@ export default function CoursePage({ params }: CoursePageProps) {
                   asChild
                   className="w-full bg-gradient-to-r from-[#796efd] to-[#5a4fe0] hover:from-[#5a4fe0] hover:to-[#796efd] text-white px-6 py-3 text-base rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 >
-                  <Link href="/apply">Apply Now</Link>
+                  <Link href="/contact">Apply Now</Link>
                 </Button>
                 <Button asChild variant="outline" className="w-full">
                   <Link href="/contact">Get More Info</Link>

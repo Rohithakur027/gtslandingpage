@@ -7,8 +7,17 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    remotePatterns: [],
   },
-}
+  async redirects() {
+    return [
+      {
+        source: "/thankyou",
+        destination: "/thank-you",
+        permanent: true,
+      },
+    ];
+  },
+};
 
-export default nextConfig
+export default nextConfig;

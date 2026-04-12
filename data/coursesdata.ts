@@ -35,8 +35,7 @@ export const courses: Course[] = [
     classesPerDay: "2 hours",
     practicalHours: "40+ hours of simulations",
     certification: "Industry-recognized & airline-accepted",
-    image:
-      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=300&fit=crop",
+    image: "/images/training/01.webp",
     icon: Plane,
     eligibility: [
       "12th Pass from recognized board",
@@ -94,8 +93,7 @@ export const courses: Course[] = [
     classesPerDay: "2 hours",
     practicalHours: "50+ hours of simulations",
     certification: "Industry-accepted",
-    image:
-      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop",
+    image: "/images/training/03.webp",
     icon: Building2,
     eligibility: [
       "12th Pass from recognized board",
@@ -153,8 +151,7 @@ export const courses: Course[] = [
     classesPerDay: "2 hours",
     practicalHours: "35+ hours",
     certification: "Recognized across aviation industry",
-    image:
-      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop",
+    image: "/images/training/05.webp",
     icon: Users,
     eligibility: [
       "12th Pass from recognized board",
@@ -212,8 +209,7 @@ export const courses: Course[] = [
     classesPerDay: "2 hours",
     practicalHours: "45+ hours",
     certification: "Industry-recognized",
-    image:
-      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop",
+    image: "/images/training/08.webp",
     icon: Globe,
     eligibility: [
       "12th Pass from recognized board",
