@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(pnpm list:*)",
-      "Bash(pnpm install:*)"
+      "Bash(pnpm install:*)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(p.dependencies.next\\)\")"
     ]
   }
 }

@@ -6,21 +6,21 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Clock, Users, Award, CheckCircle, TrendingUp } from "lucide-react";
+import { Clock, Users, Award, CheckCircle, TrendingUp, ChevronLeft } from "lucide-react";
 import { courses } from "@/data/coursesdata";
 import CourseSchema from "@/components/course-schema";
 import BreadcrumbSchema from "@/components/breadcrumb-schema";
+import Navigation from "@/components/navigation";
 
 interface CoursePageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: CoursePageProps): Promise<Metadata> {
-  const course = courses.find((c) => c.slug === params.slug);
+  const { slug } = await params;
+  const course = courses.find((c) => c.slug === slug);
 
   if (!course) {
     return { title: "Course Not Found" };
@@ -30,12 +30,12 @@ export async function generateMetadata({
     title: `${course.title} in Delhi | Ground to Sky Academy`,
     description: `Enroll in ${course.title} at Ground to Sky Academy, Janakpuri, Delhi. ${course.duration} program with ${course.practicalHours} practical training & 100% placement assistance. Admissions open!`,
     alternates: {
-      canonical: `https://groundtosky.in/courses/${params.slug}`,
+      canonical: `https://groundtosky.in/courses/${slug}`,
     },
     openGraph: {
       title: `${course.title} in Delhi | Ground to Sky Academy`,
       description: `Professional ${course.title} at Ground to Sky Academy, Janakpuri, Delhi. ${course.duration} duration with 100% placement support.`,
-      url: `https://groundtosky.in/courses/${params.slug}`,
+      url: `https://groundtosky.in/courses/${slug}`,
       siteName: "Ground to Sky Academy",
       type: "website",
       images: course.image ? [{ url: `https://groundtosky.in${course.image}`, alt: `${course.title} training at Ground to Sky Academy Delhi` }] : [],
@@ -52,16 +52,28 @@ export function generateStaticParams() {
   return courses.map((course) => ({ slug: course.slug }));
 }
 
-export default function CoursePage({ params }: CoursePageProps) {
-  const course = courses.find((c) => c.slug === params.slug);
+export default async function CoursePage({ params }: CoursePageProps) {
+  const { slug } = await params;
+  const course = courses.find((c) => c.slug === slug);
 
   if (!course) {
-    notFound();
+    return notFound();
   }
 
   return (
-    <div className="container px-4 py-12 md:px-6 md:py-24">
-      <CourseSchema course={course} />
+    <>
+      <Navigation />
+      <div className="container px-4 py-12 md:px-6 md:py-24 mt-20 max-w-7xl mx-auto">
+        {/* Back button */}
+        <Link
+          href="/courses"
+          className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-[#796efd] transition-colors mb-8"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Back to Courses
+        </Link>
+
+        <CourseSchema course={course} />
       <BreadcrumbSchema
         items={[
           { name: "Home", url: "https://groundtosky.in" },
@@ -222,5 +234,6 @@ export default function CoursePage({ params }: CoursePageProps) {
         </div>
       </div>
     </div>
+    </>
   );
 }

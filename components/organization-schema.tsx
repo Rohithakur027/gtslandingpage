@@ -13,7 +13,7 @@ export default function OrganizationSchema() {
     },
     "image": "https://groundtosky.in/images/GTS-Logo.png",
     "description":
-      "Leading aviation and hospitality training academy in Delhi offering air hostess training, cabin crew courses, airport ground staff training, and hotel management programs with 100% placement assistance. Located near Janakpuri West Metro Station.",
+      "Leading aviation and hospitality training academy in Delhi offering air hostess training, cabin crew courses, airport ground staff training, and hotel management programs with 100% placement assistance. Located near Janakpuri West Metro Station, Gate 1.",
     "telephone": "+919560002923",
     "email": "hello@groundtosky.in",
     "address": {

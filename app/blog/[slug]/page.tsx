@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getPostBySlug, getRelatedPosts } from "@/data/blogdata/blogs";
+import { getPostBySlug, getRelatedPosts, getAllPosts } from "@/data/blogdata/blogs";
 import { BlogContent } from "@/components/blog/blogstructure/blog-content";
 
 import { AuthorBio } from "@/components/blog/blogstructure/author-bio";
@@ -16,15 +16,14 @@ import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { ReadingProgress } from "@/components/blog/blogstructure/reading-progress";
 import { BlogHeader } from "@/components/blog/blogstructure/blog-header-single";
 interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     return {
@@ -38,7 +37,7 @@ export async function generateMetadata({
     keywords: post.keywords.join(", "),
     authors: [{ name: post.author.name }],
     alternates: {
-      canonical: `https://groundtosky.in/blog/${params.slug}`,
+      canonical: `https://groundtosky.in/blog/${slug}`,
     },
     openGraph: {
       title: post.title,
@@ -62,11 +61,16 @@ export async function generateMetadata({
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getPostBySlug(params.slug);
+export function generateStaticParams() {
+  return getAllPosts().map((post) => ({ slug: post.slug }));
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
-    notFound();
+    return notFound();
   }
 
   const relatedPosts = getRelatedPosts(post.id);

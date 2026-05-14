@@ -4,9 +4,31 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, Phone } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import logo from "@/public/images/GTS-Logo.png";
 
 export default function Navigation() {
+  const pathname = usePathname();
+
+  const navLink = (href: string, label: string) => {
+    const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
+    return (
+      <Link
+        href={href}
+        className={`relative whitespace-nowrap transition-colors font-medium ${
+          isActive
+            ? "text-[#796efd]"
+            : "text-slate-600 hover:text-[#796efd]"
+        }`}
+      >
+        {label}
+        {isActive && (
+          <span className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-[#796efd] rounded-full" />
+        )}
+      </Link>
+    );
+  };
+
   return (
     <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md border-b border-[#796efd]/20 z-50 shadow-sm">
       {/* Full width container with horizontal padding only */}
@@ -37,36 +59,13 @@ export default function Navigation() {
 
         {/* Middle: Navigation links for tablet and up */}
         <div className="hidden sm:flex space-x-8 flex-1 justify-center">
-          <Link
-            href="/"
-            className="text-slate-600 hover:text-[#796efd] transition-colors whitespace-nowrap"
-          >
-            Home
-          </Link>
-          <Link
-            href="/courses"
-            className="text-slate-600 hover:text-[#796efd] transition-colors whitespace-nowrap"
-          >
-            Courses
-          </Link>
-          <Link
-            href="/blog"
-            className="text-slate-600 hover:text-[#796efd] transition-colors whitespace-nowrap"
-          >
-            Blogs
-          </Link>
-          <Link
-            href="#placements"
-            className="text-slate-600 hover:text-[#796efd] transition-colors whitespace-nowrap"
-          >
+          {navLink("/", "Home")}
+          {navLink("/courses", "Courses")}
+          {navLink("/blog", "Blogs")}
+          <Link href="#placements" className="relative whitespace-nowrap transition-colors font-medium text-slate-600 hover:text-[#796efd]">
             Placements
           </Link>
-          <Link
-            href="/contact"
-            className="text-slate-600 hover:text-[#796efd] transition-colors whitespace-nowrap"
-          >
-            Contact
-          </Link>
+          {navLink("/contact", "Contact")}
         </div>
 
         {/* Right side: Phone and enroll now button */}

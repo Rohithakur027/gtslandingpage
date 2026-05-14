@@ -16,7 +16,7 @@ export default function PartnerPlacementSection() {
     },
     {
       name: "Air India",
-      logo: "/images/logos/air-india.png",
+      logo: "/images/logos/Air-India-SATS.png",
       width: 100,
       height: 60,
     },

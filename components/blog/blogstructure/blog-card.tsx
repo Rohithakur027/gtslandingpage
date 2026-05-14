@@ -1,10 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { BlogPost } from "@/types/blogType"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Calendar, Clock, User } from "lucide-react"
+import { Calendar, Clock, ChevronRight } from "lucide-react"
 
 interface BlogCardProps {
   post: BlogPost
@@ -12,63 +9,63 @@ interface BlogCardProps {
 
 export function BlogCard({ post }: BlogCardProps) {
   const formattedDate = new Date(post.publishDate).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric",
+    year: "numeric",
   })
 
   return (
-    <Card className="flex flex-col h-full bg-card border-border hover:shadow-lg transition-shadow duration-300">
-      <CardHeader className="p-0">
-        <div className="relative aspect-video w-full overflow-hidden rounded-t-lg">
+    <Link href={`/blog/${post.slug}`} className="group">
+      <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
+
+        {/* Image */}
+        <div className="relative h-48 overflow-hidden flex-shrink-0">
           <Image
             src={post.featuredImage || "/placeholder.svg"}
             alt={post.featuredImageAlt}
             fill
-            className="object-cover transition-transform duration-300 hover:scale-105"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-        </div>
-      </CardHeader>
-
-      <CardContent className="flex-1 p-6">
-        <div className="flex flex-wrap gap-2 mb-3">
-          {post.tags.slice(0, 3).map((tag) => (
-            <Badge key={tag} variant="secondary" className="text-xs">
-              {tag}
-            </Badge>
-          ))}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          {post.tags[0] && (
+            <div className="absolute top-3 left-3">
+              <span className="inline-block bg-[#796efd] text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
+                {post.tags[0]}
+              </span>
+            </div>
+          )}
         </div>
 
-        <h2 className="text-xl font-bold text-card-foreground mb-3 line-clamp-2 leading-tight">
-          <Link href={`/blog/${post.slug}`} className="hover:text-primary transition-colors duration-200">
+        {/* Body */}
+        <div className="p-5 flex flex-col flex-1">
+          <h3 className="text-base font-bold text-gray-900 mb-2 line-clamp-2 leading-snug group-hover:text-[#796efd] transition-colors">
             {post.title}
-          </Link>
-        </h2>
+          </h3>
 
-        <p className="text-muted-foreground mb-4 line-clamp-3 leading-relaxed">{post.excerpt}</p>
+          <p className="text-gray-500 text-sm line-clamp-2 mb-4 flex-1 leading-relaxed">
+            {post.excerpt}
+          </p>
 
-        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-          <div className="flex items-center gap-1">
-            <User className="w-4 h-4" />
-            <span>{post.author.name}</span>
+          {/* Meta row */}
+          <div className="flex items-center gap-3 text-xs text-gray-400 mb-4">
+            <div className="flex items-center gap-1">
+              <Calendar className="h-3.5 w-3.5" />
+              <span>{formattedDate}</span>
+            </div>
+            <span>·</span>
+            <div className="flex items-center gap-1">
+              <Clock className="h-3.5 w-3.5" />
+              <span>{post.readTime} min read</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1">
-            <Calendar className="w-4 h-4" />
-            <span>{formattedDate}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4" />
-            <span>{post.readTime} min read</span>
+
+          {/* CTA */}
+          <div className="mt-auto w-full bg-[#796efd] hover:bg-[#695ef0] text-white font-semibold py-2.5 px-5 rounded-xl transition-colors duration-200 flex items-center justify-center gap-1.5 text-sm group-hover:shadow-md">
+            Read More <ChevronRight className="h-3.5 w-3.5" />
           </div>
         </div>
-      </CardContent>
-
-      <CardFooter className="p-6 pt-0">
-        <Button asChild className="w-full">
-          <Link href={`/blog/${post.slug}`}>Read More</Link>
-        </Button>
-      </CardFooter>
-    </Card>
+      </div>
+    </Link>
   )
 }

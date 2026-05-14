@@ -4,7 +4,6 @@ import { useState, useMemo } from "react"
 import { getAllPosts } from "@/data/blogdata/blogs"
 import { BlogListingFilters } from "@/types/blogType"
 import { BlogCard } from "@/components/blog/blogs/blog-card"
-import { BlogHeader } from "@/components/blog/blogs/blog-header"
 import { BlogSearchFilters } from "@/components/blog/blogs/blog-search-filter"
 import { Pagination } from "@/components/ui/pagination"
 import { BlogListStructuredData } from "@/components/blog/seo/blog-list-structured-data"
@@ -114,13 +113,18 @@ export default function AviationBlogPage() {
         {/* Aviation academy header with branding */}
         <Navigation/>
 
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            Aviation Career Blog — Tips &amp; Guides from Delhi&apos;s Top Institute
-          </h1>
-          <p className="text-muted-foreground mb-8 text-lg">
-            Expert tips, guides &amp; industry insights on cabin crew careers, air hostess training, and aviation jobs in India.
-          </p>
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+          <div className="text-center mb-10">
+            <span className="inline-block bg-[#796efd] text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-5 tracking-wide uppercase">
+              Our Blog
+            </span>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Aviation Career Blog
+            </h1>
+            <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+              Expert tips, guides &amp; industry insights on cabin crew careers, air hostess training, and aviation jobs in India.
+            </p>
+          </div>
 
           {/* Search and filter controls */}
           <BlogSearchFilters
