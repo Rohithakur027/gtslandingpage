@@ -85,11 +85,6 @@ export default function HeroSection() {
       <div className="container mx-auto relative z-10 h-full max-w-7xl px-6 md:px-8 lg:px-12 pt-16 md:pt-12 pb-8 md:pb-12">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[65vh]">
           <div className={`text-left space-y-6 lg:pl-8 ${isMobile ? 'text-gray-800' : 'text-white'}`}>
-            <div className={`inline-flex items-center gap-2 ${isMobile ? 'bg-blue-600/10 border-blue-400/20 text-blue-700' : 'bg-blue-600/20 backdrop-blur-sm border-blue-400/30 text-blue-300'} border rounded-full px-4 py-2 text-sm font-medium`}>
-              <Plane className="w-4 h-4" />
-              <span>Elite Aviation Academy</span>
-            </div>
-
             <div className="space-y-5">
               <h1 className={`text-3xl md:text-4xl lg:text-5xl font-bold ${isMobile ? 'text-gray-900' : 'text-white'} leading-tight`}>
                 Best Air Hostess &amp;{" "}
