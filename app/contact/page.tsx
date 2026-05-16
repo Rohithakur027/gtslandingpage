@@ -68,6 +68,13 @@ export default function ApplyPage() {
     setIsSubmitting(true);
     try {
       await submitToGoogleSheets(formData);
+      if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "conversion", {
+          send_to: "AW-18154479899/grmHCl3ijaecBJvC3dRD",
+          value: 1.0,
+          currency: "INR",
+        });
+      }
       router.push("/thank-you");
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : "An unexpected error occurred");
