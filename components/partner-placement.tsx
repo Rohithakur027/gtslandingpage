@@ -64,8 +64,8 @@ export default function PartnerPlacementSection() {
       height: 55,
     },
     {
-      name: "Vistara",
-      logo: "/images/logos/vistara.png",
+      name: "Air India SATS",
+      logo: "/images/airsatslogo.jpeg",
       width: 90,
       height: 80,
     },

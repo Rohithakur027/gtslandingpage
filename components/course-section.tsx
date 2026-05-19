@@ -89,7 +89,7 @@ export default function CoursesSection() {
                   <Plane className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-[#032789] mb-2">
-                  Air Hostess Training
+                  Cabin Crew Training
                 </h3>
                 <p className="text-sm text-slate-600 mb-4">
                   8-month comprehensive program

@@ -179,11 +179,11 @@ export const courses: Course[] = [
   // ── Short-Term / Certificate Courses ──────────────────────────────────────
   {
     id: "5",
-    title: "Air Hostess Training Program",
-    slug: "air-hostess-training-program",
-    description: "Do you dream of walking down the aircraft aisle, greeting passengers with a warm smile? Our Air Hostess Training Program is designed to turn that dream into reality. This intensive program covers everything from grooming and etiquette to emergency procedures and in-flight service techniques.",
+    title: "Cabin Crew Training Program",
+    slug: "cabin-crew-training-program",
+    description: "Do you dream of walking down the aircraft aisle, greeting passengers with a warm smile? Our Cabin Crew Training Program is designed to turn that dream into reality. This intensive program covers everything from grooming and etiquette to emergency procedures and in-flight service techniques.",
     category: "Aviation",
-    duration: "6 Months",
+    duration: "8 Months",
     classesPerDay: "2 hours",
     practicalHours: "40+ hours of simulations",
     certification: "Industry-recognized & airline-accepted",
@@ -205,7 +205,7 @@ export const courses: Course[] = [
       { title: "Mock Airline Interviews", description: "Group discussions, HR rounds, role-plays." }
     ],
     careerPaths: [
-      "Air Hostess / Cabin Crew",
+      "Cabin Crew",
       "Lounge Executive",
       "Customer Service Representative",
       "Airline Ground Staff"
@@ -220,7 +220,7 @@ export const courses: Course[] = [
     slug: "hotel-operations-management",
     description: "The hotel industry is all about creating unforgettable experiences for guests. If you have a passion for hospitality and want to build a rewarding career in one of the world's fastest-growing industries, this program is for you. Learn front office, F&B, and housekeeping operations from industry experts.",
     category: "Hospitality",
-    duration: "8 Months",
+    duration: "3 Months",
     classesPerDay: "2 hours",
     practicalHours: "50+ hours of simulations",
     certification: "Industry-accepted",
@@ -257,7 +257,7 @@ export const courses: Course[] = [
     slug: "airport-ground-staff-training",
     description: "Not all heroes wear uniforms — some ensure every flight runs smoothly behind the scenes. Our Airport Ground Staff Training program prepares you for the fast-paced world of airport operations, covering check-in, boarding, baggage handling, and passenger assistance.",
     category: "Airport",
-    duration: "4 Months",
+    duration: "6 Months",
     classesPerDay: "2 hours",
     practicalHours: "35+ hours",
     certification: "Recognized across aviation industry",
@@ -295,7 +295,7 @@ export const courses: Course[] = [
     slug: "travel-tourism-management",
     description: "If travel excites you, why not turn it into a career? The global tourism industry is booming and there has never been a better time to enter. This program covers destination knowledge, tour packaging, travel agency operations, and ticketing to make you job-ready in the travel sector.",
     category: "Tourism",
-    duration: "6 Months",
+    duration: "3 Months",
     classesPerDay: "2 hours",
     practicalHours: "45+ hours",
     certification: "Industry-recognized",
