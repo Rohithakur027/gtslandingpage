@@ -13,7 +13,7 @@ interface VideoSectionProps {
 }
 
 export default function VideoSection({
-  videoUrl = "https://www.youtube.com/embed/f-v0upJIpKQ?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&showinfo=0",
+  videoUrl = "/videos/FWSTC visit May.mp4",
   thumbnailUrl = "/placeholder.svg?height=400&width=400",
   title = "Success Stories",
   description = "See how our graduates achieved their dreams",
@@ -34,7 +34,7 @@ export default function VideoSection({
       <div className="relative">
         {/* Main Video Container */}
         <div className="relative bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-sm rounded-3xl p-6 shadow-2xl border border-white/30">
-          <div className="relative w-80 h-80 md:w-96 md:h-96 bg-black rounded-2xl overflow-hidden shadow-inner">
+          <div className="relative w-52 md:w-60 bg-black rounded-2xl overflow-hidden shadow-inner" style={{ aspectRatio: "9/16" }}>
             {!isVideoPlaying ? (
               // Video Thumbnail
               <div className="relative w-full h-full bg-gradient-to-br from-blue-900 to-slate-900 flex items-center justify-center">
@@ -78,12 +78,11 @@ export default function VideoSection({
             ) : (
               // Video Player
               <div className="relative w-full h-full">
-                <iframe
+                <video
                   src={videoUrl}
-                  className="absolute inset-0 w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  frameBorder="0"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  controls
+                  autoPlay
                   title="Air Hostess Academy Video"
                 />
                 <button

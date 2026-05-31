@@ -82,7 +82,7 @@ export default function HeroSection() {
       )}
 
       {/* Main content - Single implementation */}
-      <div className="container mx-auto relative z-10 h-full max-w-7xl px-6 md:px-8 lg:px-12 pt-16 md:pt-12 pb-8 md:pb-12">
+      <div className="container mx-auto relative z-10 h-full max-w-7xl px-6 md:px-8 lg:px-12 pt-32 md:pt-36 pb-8 md:pb-12">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[65vh]">
           <div className={`text-left space-y-6 lg:pl-8 ${isMobile ? 'text-gray-800' : 'text-white'}`}>
             <div className="space-y-5">

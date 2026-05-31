@@ -216,40 +216,41 @@ export const courses: Course[] = [
   },
   {
     id: "6",
-    title: "Hotel Operations Management",
-    slug: "hotel-operations-management",
-    description: "The hotel industry is all about creating unforgettable experiences for guests. If you have a passion for hospitality and want to build a rewarding career in one of the world's fastest-growing industries, this program is for you. Learn front office, F&B, and housekeeping operations from industry experts.",
-    category: "Hospitality",
-    duration: "3 Months",
+    title: "Diploma in Hospitality & Retail",
+    slug: "diploma-hospitality-retail-skills",
+    description: "A diploma in hospitality and retail equips you with essential skills for customer-facing industries like aviation, hotels, luxury brands, and more. Gain expertise in guest handling, sales techniques, and personality development to launch a rewarding career.",
+    category: "Hospitality & Retail",
+    duration: "1 Year",
     classesPerDay: "2 hours",
-    practicalHours: "50+ hours of simulations",
-    certification: "Industry-accepted",
-    image: "/images/training/07.webp",
-    icon: Building2,
+    practicalHours: "60+ hours",
+    certification: "Industry-recognized",
+    image: "/images/training/11.webp",
+    icon: Briefcase,
     universityRecognized: false,
     eligibility: [
       "10+2 from any recognized board",
       "Good communication and interpersonal skills",
-      "Customer-focused attitude"
+      "Interest in customer-facing roles"
     ],
     syllabus: [
-      { title: "Front Office & Reservations", description: "Check-in/check-out, PMS systems, guest communication." },
-      { title: "Food & Beverage Service", description: "Restaurant operations, banquet management, bar service." },
-      { title: "Housekeeping Operations", description: "Room management, linen handling, hygiene standards." },
-      { title: "Hotel Sales & Marketing", description: "Revenue management, OTAs, corporate accounts." },
-      { title: "Hospitality Communication", description: "Guest interaction, complaint handling, upselling." },
-      { title: "Hotel Accounting Basics", description: "Billing procedures, invoicing, night audit." }
+      { title: "Guest Handling & Customer Service", description: "Professional service standards, complaint handling, and VIP guest care." },
+      { title: "Hospitality & Front Office Operations", description: "Front office procedures, food & beverage service, and hotel management basics." },
+      { title: "Retail Sales & Merchandising", description: "Sales techniques, product knowledge, upselling, and cross-selling." },
+      { title: "Store Operations & Cash Handling", description: "Retail store management, POS systems, and cash handling procedures." },
+      { title: "Personality Development & Public Speaking", description: "Confidence building, professional grooming, and public speaking." },
+      { title: "Interview & Career Preparation", description: "Resume building, LinkedIn profile improvement, and interview preparation." }
     ],
     careerPaths: [
-      "Front Desk Executive",
-      "F&B Associate",
-      "Housekeeping Supervisor",
+      "Cabin Crew",
+      "Ground Staff",
+      "Hotel Front Desk Executive",
       "Guest Relations Officer",
-      "Hotel Operations Trainee"
+      "Retail Associate",
+      "Luxury Sales Advisor"
     ],
     mentorship: "One-to-One Mentorship",
     placement: "100% Placement Assistance",
-    support: "Industry Internship Support"
+    support: "Career Counselling Support"
   },
   {
     id: "7",
@@ -289,41 +290,4 @@ export const courses: Course[] = [
     placement: "100% Placement Assistance",
     support: "Interview Preparation Support"
   },
-  {
-    id: "8",
-    title: "Travel & Tourism Management",
-    slug: "travel-tourism-management",
-    description: "If travel excites you, why not turn it into a career? The global tourism industry is booming and there has never been a better time to enter. This program covers destination knowledge, tour packaging, travel agency operations, and ticketing to make you job-ready in the travel sector.",
-    category: "Tourism",
-    duration: "3 Months",
-    classesPerDay: "2 hours",
-    practicalHours: "45+ hours",
-    certification: "Industry-recognized",
-    image: "/images/training/11.webp",
-    icon: Globe,
-    universityRecognized: false,
-    eligibility: [
-      "10+2 from any recognized board",
-      "Passion for travel and geography",
-      "Good communication skills"
-    ],
-    syllabus: [
-      { title: "World Destination Knowledge", description: "Popular tourist circuits, visa requirements, climate guide." },
-      { title: "Tour Packaging & Itinerary Planning", description: "Designing packages, costing, supplier negotiations." },
-      { title: "Travel Agency Operations", description: "GDS booking, ticketing, documentation, commissions." },
-      { title: "Airline & Hotel Reservations", description: "PNR creation, hotel GDS, booking management." },
-      { title: "Tourism Marketing", description: "Social media marketing, brochure design, client acquisition." },
-      { title: "MICE & Outbound Tourism", description: "Corporate travel, conference management, international tours." }
-    ],
-    careerPaths: [
-      "Travel Consultant",
-      "Tour Operator",
-      "Ticketing Executive",
-      "Tourism Manager",
-      "Holiday Planner"
-    ],
-    mentorship: "One-to-One Mentorship",
-    placement: "100% Placement Assistance",
-    support: "Career Counselling Support"
-  }
 ];
