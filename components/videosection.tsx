@@ -13,7 +13,7 @@ interface VideoSectionProps {
 }
 
 export default function VideoSection({
-  videoUrl = "/videos/FWSTC visit May.mp4",
+  videoUrl = "/videos/main-video.mp4",
   thumbnailUrl = "/placeholder.svg?height=400&width=400",
   title = "Success Stories",
   description = "See how our graduates achieved their dreams",
