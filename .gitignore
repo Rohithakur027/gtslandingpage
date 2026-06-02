@@ -31,3 +31,6 @@ app/blogs/
 # markdown files (except README.md)
 *.md
 !README.md
+
+# large video (exceeds GitHub 100MB limit)
+public/videos/FWSTC visit May.mp4
