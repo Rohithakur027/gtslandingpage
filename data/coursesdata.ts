@@ -220,7 +220,7 @@ export const courses: Course[] = [
     slug: "diploma-hospitality-retail-skills",
     description: "A diploma in hospitality and retail equips you with essential skills for customer-facing industries like aviation, hotels, luxury brands, and more. Gain expertise in guest handling, sales techniques, and personality development to launch a rewarding career.",
     category: "Hospitality & Retail",
-    duration: "1 Year",
+    duration: "3 Months",
     classesPerDay: "2 hours",
     practicalHours: "60+ hours",
     certification: "Industry-recognized",
