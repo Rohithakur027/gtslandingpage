@@ -7,9 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { X, Phone, User, AlertCircle } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { X, Phone, User, AlertCircle, Calendar } from "lucide-react";
 
 interface CounselingPopupProps {
   isOpen: boolean;
@@ -26,36 +32,33 @@ export default function CounselingPopup({
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    message: "",
+    ageGroup: "",
   });
 
-// Google Apps Script Web App URL
-  const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyviVIE7-c_Es0gNz64Q-9PeIuXXJ9s6C7wddXySZYQFHGtz1mRCjsvsowxrRifs4IT/exec";
-
-  const submitToGoogleSheets = async (data: typeof formData) => {
+  const submitEnquiry = async (data: typeof formData) => {
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", data.name);
-      formDataToSend.append("mobile", data.phone); // Using 'mobile' to match your existing script
-      formDataToSend.append("message", data.message);
-      formDataToSend.append("timestamp", new Date().toISOString());
-      formDataToSend.append("source", "Counseling Popup");
-
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      const response = await fetch("/api/enquiry", {
         method: "POST",
-        body: formDataToSend,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: data.name,
+          mobile: data.phone,
+          ageGroup: data.ageGroup,
+          source: "Counseling Popup",
+        }),
       });
 
-      const result = await response.text();
+      const result = await response.json();
 
-      if (result.includes("Success")) {
+      if (response.ok && result.success) {
         return { success: true };
       } else {
-        throw new Error("Failed to submit");
+        throw new Error(result.error || "Failed to submit");
       }
     } catch (error) {
-      console.error("Error submitting to Google Sheets:", error);
+      console.error("Error submitting enquiry:", error);
       throw new Error("Failed to submit request. Please try again.");
     }
   };
@@ -66,18 +69,22 @@ export default function CounselingPopup({
     setSubmitError("");
 
     // Basic validation
-    if (!formData.name.trim() || !formData.phone.trim()) {
+    if (
+      !formData.name.trim() ||
+      !formData.phone.trim() ||
+      !formData.ageGroup
+    ) {
       setSubmitError("Please fill in all required fields");
       setIsSubmitting(false);
       return;
     }
 
     try {
-      await submitToGoogleSheets(formData);
+      await submitEnquiry(formData);
       // Redirect to thank-you page on success
       router.push("/thank-you");
       // Reset form and close popup
-      setFormData({ name: "", phone: "", message: "" });
+      setFormData({ name: "", phone: "", ageGroup: "" });
       setSubmitError("");
       onClose(); // Close the popup
       return; 
@@ -91,7 +98,7 @@ export default function CounselingPopup({
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
 
@@ -115,11 +122,22 @@ export default function CounselingPopup({
     }
   };
 
+  const handleAgeGroupChange = (value: string) => {
+    setFormData({
+      ...formData,
+      ageGroup: value,
+    });
+
+    if (submitError) {
+      setSubmitError("");
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-gradient-to-br from-[#f3f1ff] to-[#faf9ff] border-[#8064f4]/30 relative overflow-hidden shadow-2xl">
+      <Card className="w-full max-w-md max-h-[90vh] bg-gradient-to-br from-[#f3f1ff] to-[#faf9ff] border-[#8064f4]/30 relative overflow-hidden shadow-2xl">
         {/* Airplane Animation Overlay */}
         {isSubmitting && (
           <div className="absolute inset-0 bg-gradient-to-r from-[#8064f4] via-[#9575f5] to-[#a686f6] z-10 flex items-center justify-center">
@@ -219,7 +237,7 @@ export default function CounselingPopup({
           </p>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="max-h-[calc(90vh-2rem)] overflow-y-auto">
           {/* Error Message */}
           {submitError && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
@@ -275,20 +293,34 @@ export default function CounselingPopup({
 
             <div className="space-y-2">
               <Label
-                htmlFor="message"
-                className="text-sm font-medium text-[#002685]"
+                htmlFor="ageGroup"
+                className="text-sm font-medium flex items-center gap-2 text-[#002685]"
               >
-                Message (Optional)
+                <Calendar className="h-4 w-4 text-[#8064f4]" />
+                Age Group *
               </Label>
-              <Textarea
-                id="message"
-                name="message"
-                placeholder="Tell us about your career goals..."
-                value={formData.message}
-                onChange={handleInputChange}
-                rows={3}
-                className="border-[#8064f4]/30 focus:border-[#8064f4] focus:ring-[#8064f4]/20 resize-none"
-              />
+              <Select
+                value={formData.ageGroup}
+                onValueChange={handleAgeGroupChange}
+              >
+                <SelectTrigger
+                  id="ageGroup"
+                  className="border-[#8064f4]/30 bg-white focus:ring-[#8064f4]/20 focus:ring-offset-0 data-[placeholder]:text-gray-500"
+                >
+                  <SelectValue placeholder="Select age group" />
+                </SelectTrigger>
+                <SelectContent className="border-[#8064f4]/30">
+                  <SelectItem value="Below 18" className="focus:bg-[#8064f4]/10 focus:text-[#032789]">
+                    Below 18
+                  </SelectItem>
+                  <SelectItem value="18-26" className="focus:bg-[#8064f4]/10 focus:text-[#032789]">
+                    18-26
+                  </SelectItem>
+                  <SelectItem value="26+" className="focus:bg-[#8064f4]/10 focus:text-[#032789]">
+                    26+
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <Button

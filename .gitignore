@@ -34,3 +34,4 @@ app/blogs/
 
 # large video (exceeds GitHub 100MB limit)
 public/videos/FWSTC visit May.mp4
+.claude/

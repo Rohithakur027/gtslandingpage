@@ -6,18 +6,30 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { AlertCircle, Phone, Mail, Clock, MapPin, Train, Bus, Car } from "lucide-react";
 import Navigation from "@/components/navigation";
 
 export default function ApplyPage() {
   const router = useRouter();
-  const [formData, setFormData] = useState({ name: "", mobile: "" });
-  const [errors, setErrors] = useState({ name: "", mobile: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    mobile: "",
+    ageGroup: "",
+  });
+  const [errors, setErrors] = useState({
+    name: "",
+    mobile: "",
+    ageGroup: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-
-  const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyviVIE7-c_Es0gNz64Q-9PeIuXXJ9s6C7wddXySZYQFHGtz1mRCjsvsowxrRifs4IT/exec";
 
   const validateMobile = (mobile: string) => /^[0-9]{10}$/.test(mobile);
 
@@ -34,40 +46,51 @@ export default function ApplyPage() {
     if (submitError) setSubmitError("");
   };
 
-  const submitToGoogleSheets = async (data: typeof formData) => {
+  const handleAgeGroupChange = (value: string) => {
+    setFormData((prev) => ({ ...prev, ageGroup: value }));
+    if (errors.ageGroup) setErrors((prev) => ({ ...prev, ageGroup: "" }));
+    if (submitError) setSubmitError("");
+  };
+
+  const submitEnquiry = async (data: typeof formData) => {
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", data.name);
-      formDataToSend.append("mobile", data.mobile);
-      formDataToSend.append("timestamp", new Date().toISOString());
-      formDataToSend.append("source", "Aviation Academy Website");
-      const response = await fetch(GOOGLE_SCRIPT_URL, { method: "POST", body: formDataToSend });
-      const result = await response.text();
-      if (result.includes("Success")) return { success: true };
-      throw new Error("Failed to submit");
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...data,
+          source: "Aviation Academy Website",
+        }),
+      });
+      const result = await response.json();
+      if (response.ok && result.success) return { success: true };
+      throw new Error(result.error || "Failed to submit");
     } catch (error) {
-      console.error("Error submitting to Google Sheets:", error);
+      console.error("Error submitting enquiry:", error);
       throw new Error("Failed to submit application. Please try again.");
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrors({ name: "", mobile: "" });
+    setErrors({ name: "", mobile: "", ageGroup: "" });
     setSubmitError("");
 
     let hasErrors = false;
-    const newErrors = { name: "", mobile: "" };
+    const newErrors = { name: "", mobile: "", ageGroup: "" };
 
     if (!formData.name.trim()) { newErrors.name = "Name is required"; hasErrors = true; }
     if (!formData.mobile.trim()) { newErrors.mobile = "Mobile number is required"; hasErrors = true; }
     else if (!validateMobile(formData.mobile)) { newErrors.mobile = "Mobile number must be exactly 10 digits"; hasErrors = true; }
+    if (!formData.ageGroup) { newErrors.ageGroup = "Age group is required"; hasErrors = true; }
 
     if (hasErrors) { setErrors(newErrors); return; }
 
     setIsSubmitting(true);
     try {
-      await submitToGoogleSheets(formData);
+      await submitEnquiry(formData);
       if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
         (window as any).gtag("event", "conversion", {
           send_to: "AW-18154479899/grmHCl3ijaecBJvC3dRD",
@@ -158,6 +181,37 @@ export default function ApplyPage() {
                   />
                   {errors.mobile && <p className="mt-1 text-sm text-red-600">{errors.mobile}</p>}
                   <p className="mt-1 text-xs text-gray-400">Enter exactly 10 digits (e.g., 9876543210)</p>
+                </div>
+
+                <div>
+                  <label htmlFor="ageGroup" className="block text-sm font-medium text-gray-700 mb-2">
+                    Age Group <span className="text-red-500">*</span>
+                  </label>
+                  <Select
+                    value={formData.ageGroup}
+                    onValueChange={handleAgeGroupChange}
+                  >
+                    <SelectTrigger
+                      id="ageGroup"
+                      className={`w-full px-4 py-3 border rounded-lg bg-white focus:ring-2 focus:ring-[#796efd]/40 focus:ring-offset-0 focus:border-[#796efd] transition-colors data-[placeholder]:text-gray-500 ${
+                        errors.ageGroup ? "border-red-500" : "border-gray-300"
+                      }`}
+                    >
+                      <SelectValue placeholder="Select age group" />
+                    </SelectTrigger>
+                    <SelectContent className="border-[#796efd]/30">
+                      <SelectItem value="Below 18" className="focus:bg-[#796efd]/10 focus:text-primary">
+                        Below 18
+                      </SelectItem>
+                      <SelectItem value="18-26" className="focus:bg-[#796efd]/10 focus:text-primary">
+                        18-26
+                      </SelectItem>
+                      <SelectItem value="26+" className="focus:bg-[#796efd]/10 focus:text-primary">
+                        26+
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {errors.ageGroup && <p className="mt-1 text-sm text-red-600">{errors.ageGroup}</p>}
                 </div>
 
                 <Button
