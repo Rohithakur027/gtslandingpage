@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { X, Phone, User, AlertCircle, Calendar } from "lucide-react";
+import { X, Phone, User, AlertCircle, Calendar, CheckCircle } from "lucide-react";
 
 interface CounselingPopupProps {
   isOpen: boolean;
@@ -29,6 +29,7 @@ export default function CounselingPopup({
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [submitSuccess, setSubmitSuccess] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -37,16 +38,15 @@ export default function CounselingPopup({
 
   const submitEnquiry = async (data: typeof formData) => {
     try {
-      const response = await fetch("/api/enquiry", {
+      const response = await fetch("/api/leads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: data.name,
-          mobile: data.phone,
-          ageGroup: data.ageGroup,
-          source: "Counseling Popup",
+          full_name: data.name,
+          phone: data.phone,
+          age_group: data.ageGroup,
         }),
       });
 
@@ -59,6 +59,9 @@ export default function CounselingPopup({
       }
     } catch (error) {
       console.error("Error submitting enquiry:", error);
+      if (error instanceof Error) {
+        throw error;
+      }
       throw new Error("Failed to submit request. Please try again.");
     }
   };
@@ -67,6 +70,7 @@ export default function CounselingPopup({
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError("");
+    setSubmitSuccess("");
 
     // Basic validation
     if (
@@ -81,12 +85,13 @@ export default function CounselingPopup({
 
     try {
       await submitEnquiry(formData);
-      // Redirect to thank-you page on success
-      router.push("/thank-you");
-      // Reset form and close popup
+      setSubmitSuccess("Thank you. Our admissions team will call you shortly.");
       setFormData({ name: "", phone: "", ageGroup: "" });
       setSubmitError("");
-      onClose(); // Close the popup
+      window.setTimeout(() => {
+        router.push("/thank-you");
+        onClose();
+      }, 900);
       return; 
     } catch (error) {
       setSubmitError(
@@ -120,6 +125,9 @@ export default function CounselingPopup({
     if (submitError) {
       setSubmitError("");
     }
+    if (submitSuccess) {
+      setSubmitSuccess("");
+    }
   };
 
   const handleAgeGroupChange = (value: string) => {
@@ -130,6 +138,9 @@ export default function CounselingPopup({
 
     if (submitError) {
       setSubmitError("");
+    }
+    if (submitSuccess) {
+      setSubmitSuccess("");
     }
   };
 
@@ -248,6 +259,15 @@ export default function CounselingPopup({
             </div>
           )}
 
+          {submitSuccess && (
+            <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-start gap-2">
+              <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="text-sm text-green-700">{submitSuccess}</p>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label
@@ -325,7 +345,7 @@ export default function CounselingPopup({
 
             <Button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || Boolean(submitSuccess)}
               className="w-full bg-gradient-to-r from-[#8064f4] to-[#9575f5] hover:from-[#6b52d9] hover:to-[#8064f4] text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? "Taking Off..." : "Get Free Counseling"}

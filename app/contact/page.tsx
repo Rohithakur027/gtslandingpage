@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AlertCircle, Phone, Mail, Clock, MapPin, Train, Bus, Car } from "lucide-react";
+import { AlertCircle, Phone, Mail, Clock, MapPin, Train, Bus, Car, CheckCircle } from "lucide-react";
 import Navigation from "@/components/navigation";
 
 export default function ApplyPage() {
@@ -30,6 +30,7 @@ export default function ApplyPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [submitSuccess, setSubmitSuccess] = useState("");
 
   const validateMobile = (mobile: string) => /^[0-9]{10}$/.test(mobile);
 
@@ -44,24 +45,27 @@ export default function ApplyPage() {
       if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
     }
     if (submitError) setSubmitError("");
+    if (submitSuccess) setSubmitSuccess("");
   };
 
   const handleAgeGroupChange = (value: string) => {
     setFormData((prev) => ({ ...prev, ageGroup: value }));
     if (errors.ageGroup) setErrors((prev) => ({ ...prev, ageGroup: "" }));
     if (submitError) setSubmitError("");
+    if (submitSuccess) setSubmitSuccess("");
   };
 
   const submitEnquiry = async (data: typeof formData) => {
     try {
-      const response = await fetch("/api/enquiry", {
+      const response = await fetch("/api/leads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          ...data,
-          source: "Aviation Academy Website",
+          full_name: data.name,
+          phone: data.mobile,
+          age_group: data.ageGroup,
         }),
       });
       const result = await response.json();
@@ -69,6 +73,9 @@ export default function ApplyPage() {
       throw new Error(result.error || "Failed to submit");
     } catch (error) {
       console.error("Error submitting enquiry:", error);
+      if (error instanceof Error) {
+        throw error;
+      }
       throw new Error("Failed to submit application. Please try again.");
     }
   };
@@ -77,6 +84,7 @@ export default function ApplyPage() {
     e.preventDefault();
     setErrors({ name: "", mobile: "", ageGroup: "" });
     setSubmitError("");
+    setSubmitSuccess("");
 
     let hasErrors = false;
     const newErrors = { name: "", mobile: "", ageGroup: "" };
@@ -98,7 +106,10 @@ export default function ApplyPage() {
           currency: "INR",
         });
       }
-      router.push("/thank-you");
+      setSubmitSuccess("Thank you. Our admissions team will call you shortly.");
+      window.setTimeout(() => {
+        router.push("/thank-you");
+      }, 900);
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : "An unexpected error occurred");
     } finally {
@@ -140,6 +151,16 @@ export default function ApplyPage() {
                   <div>
                     <h3 className="text-sm font-medium text-red-800">Submission Error</h3>
                     <p className="text-sm text-red-700 mt-1">{submitError}</p>
+                  </div>
+                </div>
+              )}
+
+              {submitSuccess && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-sm font-medium text-green-800">Submitted Successfully</h3>
+                    <p className="text-sm text-green-700 mt-1">{submitSuccess}</p>
                   </div>
                 </div>
               )}
@@ -216,7 +237,7 @@ export default function ApplyPage() {
 
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || Boolean(submitSuccess)}
                   className={`w-full ${
                     isSubmitting ? "bg-[#796efd]/80 animate-pulse" : "bg-[#796efd] hover:bg-[#695ef0]"
                   } text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed`}
