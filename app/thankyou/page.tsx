@@ -34,13 +34,14 @@ export default function ThankYouModal({
       </div>
 
       <Card className="w-full max-w-md mx-auto bg-white/95 backdrop-blur-sm shadow-2xl border-0 relative">
-        <button
+        <Link
+          href="/"
           onClick={onClose}
           className="absolute right-3 top-3 text-gray-400 hover:text-gray-600 transition-colors"
           aria-label="Close"
         >
           <X className="h-4 w-4" />
-        </button>
+        </Link>
 
         <CardHeader className="text-center pb-4 pt-6">
           <div className="relative mx-auto mb-4">
