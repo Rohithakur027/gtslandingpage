@@ -145,7 +145,7 @@ export const ingestWebsiteLead = async ({
   const referer = headers.get("referer") || headers.get("referrer");
 
   return prisma.$transaction(async (tx) => {
-    await tx.$queryRaw`
+    await tx.$executeRaw`
       SELECT pg_advisory_xact_lock(hashtext(${payload.normalizedPhone})::bigint)
     `;
 
