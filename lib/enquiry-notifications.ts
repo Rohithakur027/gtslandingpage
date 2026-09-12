@@ -122,11 +122,26 @@ const sendLeadEmail = async (payload: EnquiryNotificationPayload) => {
 export const sendEnquiryNotifications = async (
   payload: EnquiryNotificationPayload
 ) => {
-  await submitToGoogleSheets(payload);
-  const emailSent = await sendLeadEmail(payload);
+  let sheetSynced = false;
+  let emailSent = false;
+
+  try {
+    await submitToGoogleSheets(payload);
+    sheetSynced = true;
+  } catch (error) {
+    console.error("Google Sheets sync failed:", error);
+  }
+
+  // The email is a courtesy notification; a broken mailbox must not discard a
+  // lead that already reached the sheet.
+  try {
+    emailSent = await sendLeadEmail(payload);
+  } catch (error) {
+    console.error("Lead notification email failed:", error);
+  }
 
   return {
-    sheetSynced: true,
+    sheetSynced,
     emailSent,
   };
 };

@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import {
-  ingestWebsiteLead,
+  normalizeLeadPayload,
   LeadValidationError,
-} from "@/lib/lead-ingestion";
+} from "@/lib/lead-validation";
 import { sendEnquiryNotifications } from "@/lib/enquiry-notifications";
 
 export const runtime = "nodejs";
@@ -18,28 +18,26 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = await ingestWebsiteLead({
-      body: body as Record<string, unknown>,
-      headers: request.headers,
-    });
-    let notifications = {
-      sheetSynced: false,
-      emailSent: false,
-    };
+    const payload = normalizeLeadPayload(body as Record<string, unknown>);
 
-    try {
-      notifications = await sendEnquiryNotifications(result.notificationPayload);
-    } catch (notificationError) {
-      console.error(
-        "Lead saved but enquiry notifications failed:",
-        notificationError
+    const notifications = await sendEnquiryNotifications({
+      name: payload.fullName,
+      mobile: payload.phoneRaw,
+      ageGroup: payload.ageGroup || "",
+      source: "Website Form",
+    });
+
+    // The sheet is the system of record for leads, so a failed sync is a
+    // failed submission — surface it instead of showing a false success.
+    if (!notifications.sheetSynced) {
+      return NextResponse.json(
+        { error: "Failed to submit request. Please try again." },
+        { status: 500 }
       );
     }
 
     return NextResponse.json({
       success: true,
-      leadId: result.lead.id,
-      created: result.created,
       ...notifications,
     });
   } catch (error) {
@@ -47,7 +45,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
-    console.error("Error ingesting website lead:", error);
+    console.error("Error capturing website lead:", error);
     return NextResponse.json(
       { error: "Failed to submit request. Please try again." },
       { status: 500 }

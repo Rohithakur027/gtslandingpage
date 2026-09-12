@@ -36,6 +36,13 @@ export async function POST(request: Request) {
 
     const notifications = await sendEnquiryNotifications(payload);
 
+    if (!notifications.sheetSynced) {
+      return NextResponse.json(
+        { error: "Failed to submit application. Please try again." },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json({ success: true, ...notifications });
   } catch (error) {
     console.error("Error submitting enquiry:", error);
