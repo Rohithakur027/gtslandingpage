@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { trackLeadFormConversion } from "@/lib/gtag";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -99,13 +100,7 @@ export default function ApplyPage() {
     setIsSubmitting(true);
     try {
       await submitEnquiry(formData);
-      if (typeof window !== "undefined" && typeof (window as any).gtag === "function") {
-        (window as any).gtag("event", "conversion", {
-          send_to: "AW-18154479899/grmHCl3ijaecBJvC3dRD",
-          value: 1.0,
-          currency: "INR",
-        });
-      }
+      trackLeadFormConversion();
       setSubmitSuccess("Thank you. Our admissions team will call you shortly.");
       window.setTimeout(() => {
         router.push("/thank-you");
