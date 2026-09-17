@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { trackLeadFormConversion } from "@/lib/gtag";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -85,6 +86,7 @@ export default function CounselingPopup({
 
     try {
       await submitEnquiry(formData);
+      trackLeadFormConversion();
       setSubmitSuccess("Thank you. Our admissions team will call you shortly.");
       setFormData({ name: "", phone: "", ageGroup: "" });
       setSubmitError("");
