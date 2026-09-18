@@ -44,10 +44,20 @@ export default function RootLayout({
         <OrganizationSchema />
         <WebSiteSchema />
 
+        {/* Stop GTM-WX5DTG84 from firing its own Google Ads conversion tags.
+            The lead conversion is owned by lib/gtag.ts so it only counts on a
+            successful form submit, not on every /thank-you page view. */}
+        <Script id="gtm-blocklist" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({'gtm.blocklist': ['awct']});
+          `}
+        </Script>
+
         {/* Google Ads conversion tracking */}
         <Script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17452776636"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-11499123226"
           strategy="afterInteractive"
         />
         <Script id="google-ads-init" strategy="afterInteractive">
@@ -55,8 +65,6 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-17452776636');
-            gtag('config', 'AW-18154479899');
             gtag('config', 'AW-11499123226');
           `}
         </Script>
