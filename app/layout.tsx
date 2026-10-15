@@ -18,6 +18,16 @@ export const metadata: Metadata = {
   keywords:
     "air hostess training Delhi, ground staff training Delhi, cabin crew training Delhi, aviation training courses Delhi India, best air hostess academy Delhi, cabin crew course Janakpuri, airport ground staff course Delhi, hotel management course Delhi, aviation hospitality training Delhi",
   metadataBase: new URL("https://groundtosky.in"),
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    shortcut: ["/favicon.ico"],
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     siteName: "Ground to Sky Academy",
     type: "website",
