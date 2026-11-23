@@ -24,6 +24,9 @@ export async function POST(request: Request) {
       name: payload.fullName,
       mobile: payload.phoneRaw,
       ageGroup: payload.ageGroup || "",
+      qualification: payload.qualification || "",
+      interestedCourse: payload.interestedCourse || "",
+      location: payload.location || "",
       source: "Website Form",
     });
 
