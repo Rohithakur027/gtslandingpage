@@ -4,6 +4,9 @@ export type EnquiryNotificationPayload = {
   name: string;
   mobile: string;
   ageGroup: string;
+  qualification?: string;
+  interestedCourse?: string;
+  location?: string;
   source: string;
 };
 
@@ -30,6 +33,9 @@ const submitToGoogleSheets = async (payload: EnquiryNotificationPayload) => {
   formData.append("name", payload.name);
   formData.append("mobile", payload.mobile);
   formData.append("ageGroup", payload.ageGroup);
+  formData.append("qualification", payload.qualification || "");
+  formData.append("interestedCourse", payload.interestedCourse || "");
+  formData.append("location", payload.location || "");
   formData.append("timestamp", new Date().toISOString());
   formData.append("source", payload.source);
 
@@ -89,6 +95,9 @@ const sendLeadEmail = async (payload: EnquiryNotificationPayload) => {
     name: escapeHtml(payload.name),
     mobile: escapeHtml(payload.mobile),
     ageGroup: escapeHtml(payload.ageGroup),
+    qualification: escapeHtml(payload.qualification || "-"),
+    interestedCourse: escapeHtml(payload.interestedCourse || "-"),
+    location: escapeHtml(payload.location || "-"),
     source: escapeHtml(payload.source),
   };
 
@@ -103,6 +112,9 @@ const sendLeadEmail = async (payload: EnquiryNotificationPayload) => {
       `Name: ${payload.name}`,
       `Mobile: ${payload.mobile}`,
       `Age Group: ${payload.ageGroup}`,
+      `Qualification: ${payload.qualification || "-"}`,
+      `Interested Course: ${payload.interestedCourse || "-"}`,
+      `Location: ${payload.location || "-"}`,
       `Source: ${payload.source}`,
     ].join("\n"),
     html: `
@@ -111,6 +123,9 @@ const sendLeadEmail = async (payload: EnquiryNotificationPayload) => {
         <tr><td><strong>Name</strong></td><td>${safePayload.name}</td></tr>
         <tr><td><strong>Mobile</strong></td><td>${safePayload.mobile}</td></tr>
         <tr><td><strong>Age Group</strong></td><td>${safePayload.ageGroup}</td></tr>
+        <tr><td><strong>Qualification</strong></td><td>${safePayload.qualification}</td></tr>
+        <tr><td><strong>Interested Course</strong></td><td>${safePayload.interestedCourse}</td></tr>
+        <tr><td><strong>Location</strong></td><td>${safePayload.location}</td></tr>
         <tr><td><strong>Source</strong></td><td>${safePayload.source}</td></tr>
       </table>
     `,

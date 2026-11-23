@@ -4,6 +4,12 @@ import type React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { trackLeadFormConversion } from "@/lib/gtag";
+import {
+  AGE_OPTIONS,
+  QUALIFICATION_OPTIONS,
+  COURSE_OPTIONS,
+  detectCityFromBrowser,
+} from "@/lib/enquiry-options";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -16,12 +22,42 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { X, Phone, User, AlertCircle, Calendar, CheckCircle } from "lucide-react";
+import {
+  X,
+  Phone,
+  User,
+  AlertCircle,
+  Calendar,
+  CheckCircle,
+  GraduationCap,
+  BookOpen,
+  MapPin,
+  Navigation,
+  Loader2,
+} from "lucide-react";
 
 interface CounselingPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const EMPTY_FORM = {
+  name: "",
+  phone: "",
+  ageGroup: "",
+  qualification: "",
+  interestedCourse: "",
+  location: "",
+};
+
+type FormData = typeof EMPTY_FORM;
+type SelectField = "ageGroup" | "qualification" | "interestedCourse";
+
+const itemClass = "focus:bg-[#8064f4]/10 focus:text-[#032789]";
+const triggerClass =
+  "border-[#8064f4]/30 bg-white focus:ring-[#8064f4]/20 focus:ring-offset-0 data-[placeholder]:text-gray-500";
+const labelClass =
+  "text-sm font-medium flex items-center gap-2 text-[#002685]";
 
 export default function CounselingPopup({
   isOpen,
@@ -31,13 +67,11 @@ export default function CounselingPopup({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState("");
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    ageGroup: "",
-  });
+  const [isLocating, setIsLocating] = useState(false);
+  const [locationHint, setLocationHint] = useState("");
+  const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
 
-  const submitEnquiry = async (data: typeof formData) => {
+  const submitEnquiry = async (data: FormData) => {
     try {
       const response = await fetch("/api/leads", {
         method: "POST",
@@ -48,6 +82,9 @@ export default function CounselingPopup({
           full_name: data.name,
           phone: data.phone,
           age_group: data.ageGroup,
+          qualification: data.qualification,
+          interested_course: data.interestedCourse,
+          location: data.location.trim(),
         }),
       });
 
@@ -77,7 +114,10 @@ export default function CounselingPopup({
     if (
       !formData.name.trim() ||
       !formData.phone.trim() ||
-      !formData.ageGroup
+      !formData.ageGroup ||
+      !formData.qualification ||
+      !formData.interestedCourse ||
+      !formData.location.trim()
     ) {
       setSubmitError("Please fill in all required fields");
       setIsSubmitting(false);
@@ -88,7 +128,8 @@ export default function CounselingPopup({
       await submitEnquiry(formData);
       trackLeadFormConversion();
       setSubmitSuccess("Thank you. Our admissions team will call you shortly.");
-      setFormData({ name: "", phone: "", ageGroup: "" });
+      setFormData(EMPTY_FORM);
+      setLocationHint("");
       setSubmitError("");
       window.setTimeout(() => {
         router.push("/thank-you");
@@ -132,11 +173,8 @@ export default function CounselingPopup({
     }
   };
 
-  const handleAgeGroupChange = (value: string) => {
-    setFormData({
-      ...formData,
-      ageGroup: value,
-    });
+  const handleSelectChange = (field: SelectField) => (value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
 
     if (submitError) {
       setSubmitError("");
@@ -146,11 +184,29 @@ export default function CounselingPopup({
     }
   };
 
+  const handleDetectLocation = async () => {
+    setLocationHint("");
+    setIsLocating(true);
+    try {
+      const place = await detectCityFromBrowser();
+      setFormData((prev) => ({ ...prev, location: place }));
+      if (submitError) setSubmitError("");
+    } catch (error) {
+      setLocationHint(
+        error instanceof Error
+          ? error.message
+          : "Couldn't get your location. Please type your city."
+      );
+    } finally {
+      setIsLocating(false);
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md max-h-[90vh] bg-gradient-to-br from-[#f3f1ff] to-[#faf9ff] border-[#8064f4]/30 relative overflow-hidden shadow-2xl">
+      <Card className="w-full max-w-md max-h-[90vh] max-h-[90dvh] flex flex-col bg-gradient-to-br from-[#f3f1ff] to-[#faf9ff] border-[#8064f4]/30 relative overflow-hidden shadow-2xl">
         {/* Airplane Animation Overlay */}
         {isSubmitting && (
           <div className="absolute inset-0 bg-gradient-to-r from-[#8064f4] via-[#9575f5] to-[#a686f6] z-10 flex items-center justify-center">
@@ -237,7 +293,7 @@ export default function CounselingPopup({
           <X className="h-4 w-4" />
         </Button>
 
-        <CardHeader className="text-center pb-4">
+        <CardHeader className="text-center pb-4 shrink-0">
           <Badge className="mx-auto mb-2 bg-gradient-to-r from-[#8064f4] to-[#9575f5] text-white border-0">
             🎓 Free Counseling
           </Badge>
@@ -250,7 +306,7 @@ export default function CounselingPopup({
           </p>
         </CardHeader>
 
-        <CardContent className="max-h-[calc(90vh-2rem)] overflow-y-auto">
+        <CardContent className="flex-1 min-h-0 overflow-y-auto">
           {/* Error Message */}
           {submitError && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-start gap-2">
@@ -314,35 +370,110 @@ export default function CounselingPopup({
             </div>
 
             <div className="space-y-2">
-              <Label
-                htmlFor="ageGroup"
-                className="text-sm font-medium flex items-center gap-2 text-[#002685]"
-              >
+              <Label htmlFor="ageGroup" className={labelClass}>
                 <Calendar className="h-4 w-4 text-[#8064f4]" />
-                Age Group *
+                Select Your Age *
               </Label>
               <Select
                 value={formData.ageGroup}
-                onValueChange={handleAgeGroupChange}
+                onValueChange={handleSelectChange("ageGroup")}
               >
-                <SelectTrigger
-                  id="ageGroup"
-                  className="border-[#8064f4]/30 bg-white focus:ring-[#8064f4]/20 focus:ring-offset-0 data-[placeholder]:text-gray-500"
-                >
-                  <SelectValue placeholder="Select age group" />
+                <SelectTrigger id="ageGroup" className={triggerClass}>
+                  <SelectValue placeholder="Select your age" />
                 </SelectTrigger>
                 <SelectContent className="border-[#8064f4]/30">
-                  <SelectItem value="Below 18" className="focus:bg-[#8064f4]/10 focus:text-[#032789]">
-                    Below 18
-                  </SelectItem>
-                  <SelectItem value="18-26" className="focus:bg-[#8064f4]/10 focus:text-[#032789]">
-                    18-26
-                  </SelectItem>
-                  <SelectItem value="26+" className="focus:bg-[#8064f4]/10 focus:text-[#032789]">
-                    26+
-                  </SelectItem>
+                  {AGE_OPTIONS.map((option) => (
+                    <SelectItem key={option} value={option} className={itemClass}>
+                      {option}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="qualification" className={labelClass}>
+                <GraduationCap className="h-4 w-4 text-[#8064f4]" />
+                Qualification *
+              </Label>
+              <Select
+                value={formData.qualification}
+                onValueChange={handleSelectChange("qualification")}
+              >
+                <SelectTrigger id="qualification" className={triggerClass}>
+                  <SelectValue placeholder="Select your qualification" />
+                </SelectTrigger>
+                <SelectContent className="border-[#8064f4]/30">
+                  {QUALIFICATION_OPTIONS.map((option) => (
+                    <SelectItem key={option} value={option} className={itemClass}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="interestedCourse" className={labelClass}>
+                <BookOpen className="h-4 w-4 text-[#8064f4]" />
+                Interested Course *
+              </Label>
+              <Select
+                value={formData.interestedCourse}
+                onValueChange={handleSelectChange("interestedCourse")}
+              >
+                <SelectTrigger id="interestedCourse" className={triggerClass}>
+                  <SelectValue placeholder="Select a course" />
+                </SelectTrigger>
+                <SelectContent className="border-[#8064f4]/30">
+                  {COURSE_OPTIONS.map((option) => (
+                    <SelectItem key={option} value={option} className={itemClass}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="location" className={labelClass}>
+                <MapPin className="h-4 w-4 text-[#8064f4]" />
+                Your Location *
+              </Label>
+              <div className="flex gap-2">
+                <Input
+                  id="location"
+                  name="location"
+                  type="text"
+                  placeholder="e.g. Delhi, Mumbai"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                  autoComplete="address-level2"
+                  maxLength={120}
+                  required
+                  className="border-[#8064f4]/30 focus:border-[#8064f4] focus:ring-[#8064f4]/20"
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleDetectLocation}
+                  disabled={isLocating}
+                  title="Use my current location"
+                  className="shrink-0 border-[#8064f4]/30 text-[#8064f4] hover:bg-[#8064f4]/10 hover:text-[#6b52d9]"
+                >
+                  {isLocating ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Navigation className="h-4 w-4" />
+                  )}
+                  <span className="ml-1.5 hidden sm:inline">
+                    {isLocating ? "Locating" : "Detect"}
+                  </span>
+                </Button>
+              </div>
+              {locationHint && (
+                <p className="text-xs text-amber-600">{locationHint}</p>
+              )}
             </div>
 
             <Button

@@ -14,21 +14,41 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { AlertCircle, Phone, Mail, Clock, MapPin, Train, Bus, Car, CheckCircle } from "lucide-react";
+import { AlertCircle, Phone, Mail, Clock, MapPin, Train, Bus, Car, CheckCircle, Loader2 } from "lucide-react";
 import Navigation from "@/components/navigation";
+import {
+  AGE_OPTIONS,
+  QUALIFICATION_OPTIONS,
+  COURSE_OPTIONS,
+  detectCityFromBrowser,
+} from "@/lib/enquiry-options";
+
+const EMPTY_FORM = {
+  name: "",
+  mobile: "",
+  ageGroup: "",
+  qualification: "",
+  interestedCourse: "",
+  location: "",
+};
+
+type FormData = typeof EMPTY_FORM;
+type SelectField = "ageGroup" | "qualification" | "interestedCourse";
+
+const EMPTY_ERRORS: FormData = { ...EMPTY_FORM };
+
+const selectTriggerClass = (hasError: boolean) =>
+  `w-full px-4 py-3 border rounded-lg bg-white focus:ring-2 focus:ring-[#796efd]/40 focus:ring-offset-0 focus:border-[#796efd] transition-colors data-[placeholder]:text-gray-500 ${
+    hasError ? "border-red-500" : "border-gray-300"
+  }`;
+const selectItemClass = "focus:bg-[#796efd]/10 focus:text-primary";
 
 export default function ApplyPage() {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    name: "",
-    mobile: "",
-    ageGroup: "",
-  });
-  const [errors, setErrors] = useState({
-    name: "",
-    mobile: "",
-    ageGroup: "",
-  });
+  const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
+  const [errors, setErrors] = useState<FormData>(EMPTY_ERRORS);
+  const [isLocating, setIsLocating] = useState(false);
+  const [locationHint, setLocationHint] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState("");
@@ -43,20 +63,38 @@ export default function ApplyPage() {
       if (errors.mobile) setErrors((prev) => ({ ...prev, mobile: "" }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
-      if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
+      setErrors((prev) => (prev[name as keyof FormData] ? { ...prev, [name]: "" } : prev));
     }
     if (submitError) setSubmitError("");
     if (submitSuccess) setSubmitSuccess("");
   };
 
-  const handleAgeGroupChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, ageGroup: value }));
-    if (errors.ageGroup) setErrors((prev) => ({ ...prev, ageGroup: "" }));
+  const handleSelectChange = (field: SelectField) => (value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
     if (submitError) setSubmitError("");
     if (submitSuccess) setSubmitSuccess("");
   };
 
-  const submitEnquiry = async (data: typeof formData) => {
+  const handleDetectLocation = async () => {
+    setLocationHint("");
+    setIsLocating(true);
+    try {
+      const place = await detectCityFromBrowser();
+      setFormData((prev) => ({ ...prev, location: place }));
+      setErrors((prev) => ({ ...prev, location: "" }));
+    } catch (error) {
+      setLocationHint(
+        error instanceof Error
+          ? error.message
+          : "Couldn't get your location. Please type your city."
+      );
+    } finally {
+      setIsLocating(false);
+    }
+  };
+
+  const submitEnquiry = async (data: FormData) => {
     try {
       const response = await fetch("/api/leads", {
         method: "POST",
@@ -67,6 +105,9 @@ export default function ApplyPage() {
           full_name: data.name,
           phone: data.mobile,
           age_group: data.ageGroup,
+          qualification: data.qualification,
+          interested_course: data.interestedCourse,
+          location: data.location.trim(),
         }),
       });
       const result = await response.json();
@@ -83,17 +124,20 @@ export default function ApplyPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrors({ name: "", mobile: "", ageGroup: "" });
+    setErrors(EMPTY_ERRORS);
     setSubmitError("");
     setSubmitSuccess("");
 
     let hasErrors = false;
-    const newErrors = { name: "", mobile: "", ageGroup: "" };
+    const newErrors: FormData = { ...EMPTY_ERRORS };
 
     if (!formData.name.trim()) { newErrors.name = "Name is required"; hasErrors = true; }
     if (!formData.mobile.trim()) { newErrors.mobile = "Mobile number is required"; hasErrors = true; }
     else if (!validateMobile(formData.mobile)) { newErrors.mobile = "Mobile number must be exactly 10 digits"; hasErrors = true; }
-    if (!formData.ageGroup) { newErrors.ageGroup = "Age group is required"; hasErrors = true; }
+    if (!formData.ageGroup) { newErrors.ageGroup = "Please select your age"; hasErrors = true; }
+    if (!formData.qualification) { newErrors.qualification = "Please select your qualification"; hasErrors = true; }
+    if (!formData.interestedCourse) { newErrors.interestedCourse = "Please select a course"; hasErrors = true; }
+    if (!formData.location.trim()) { newErrors.location = "Location is required"; hasErrors = true; }
 
     if (hasErrors) { setErrors(newErrors); return; }
 
@@ -201,33 +245,108 @@ export default function ApplyPage() {
 
                 <div>
                   <label htmlFor="ageGroup" className="block text-sm font-medium text-gray-700 mb-2">
-                    Age Group <span className="text-red-500">*</span>
+                    Select Your Age <span className="text-red-500">*</span>
                   </label>
                   <Select
                     value={formData.ageGroup}
-                    onValueChange={handleAgeGroupChange}
+                    onValueChange={handleSelectChange("ageGroup")}
                   >
-                    <SelectTrigger
-                      id="ageGroup"
-                      className={`w-full px-4 py-3 border rounded-lg bg-white focus:ring-2 focus:ring-[#796efd]/40 focus:ring-offset-0 focus:border-[#796efd] transition-colors data-[placeholder]:text-gray-500 ${
-                        errors.ageGroup ? "border-red-500" : "border-gray-300"
-                      }`}
-                    >
-                      <SelectValue placeholder="Select age group" />
+                    <SelectTrigger id="ageGroup" className={selectTriggerClass(Boolean(errors.ageGroup))}>
+                      <SelectValue placeholder="Select your age" />
                     </SelectTrigger>
                     <SelectContent className="border-[#796efd]/30">
-                      <SelectItem value="Below 18" className="focus:bg-[#796efd]/10 focus:text-primary">
-                        Below 18
-                      </SelectItem>
-                      <SelectItem value="18-26" className="focus:bg-[#796efd]/10 focus:text-primary">
-                        18-26
-                      </SelectItem>
-                      <SelectItem value="26+" className="focus:bg-[#796efd]/10 focus:text-primary">
-                        26+
-                      </SelectItem>
+                      {AGE_OPTIONS.map((option) => (
+                        <SelectItem key={option} value={option} className={selectItemClass}>
+                          {option}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   {errors.ageGroup && <p className="mt-1 text-sm text-red-600">{errors.ageGroup}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="qualification" className="block text-sm font-medium text-gray-700 mb-2">
+                    Qualification <span className="text-red-500">*</span>
+                  </label>
+                  <Select
+                    value={formData.qualification}
+                    onValueChange={handleSelectChange("qualification")}
+                  >
+                    <SelectTrigger id="qualification" className={selectTriggerClass(Boolean(errors.qualification))}>
+                      <SelectValue placeholder="Select your qualification" />
+                    </SelectTrigger>
+                    <SelectContent className="border-[#796efd]/30">
+                      {QUALIFICATION_OPTIONS.map((option) => (
+                        <SelectItem key={option} value={option} className={selectItemClass}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {errors.qualification && <p className="mt-1 text-sm text-red-600">{errors.qualification}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="interestedCourse" className="block text-sm font-medium text-gray-700 mb-2">
+                    Interested Course <span className="text-red-500">*</span>
+                  </label>
+                  <Select
+                    value={formData.interestedCourse}
+                    onValueChange={handleSelectChange("interestedCourse")}
+                  >
+                    <SelectTrigger id="interestedCourse" className={selectTriggerClass(Boolean(errors.interestedCourse))}>
+                      <SelectValue placeholder="Select a course" />
+                    </SelectTrigger>
+                    <SelectContent className="border-[#796efd]/30">
+                      {COURSE_OPTIONS.map((option) => (
+                        <SelectItem key={option} value={option} className={selectItemClass}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {errors.interestedCourse && <p className="mt-1 text-sm text-red-600">{errors.interestedCourse}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
+                    Your Location <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      id="location"
+                      name="location"
+                      value={formData.location}
+                      onChange={handleChange}
+                      autoComplete="address-level2"
+                      maxLength={120}
+                      className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#796efd]/40 focus:border-[#796efd] transition-colors ${
+                        errors.location ? "border-red-500" : "border-gray-300"
+                      }`}
+                      placeholder="e.g. Delhi, Mumbai"
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handleDetectLocation}
+                      disabled={isLocating}
+                      title="Use my current location"
+                      className="shrink-0 h-auto px-4 border-[#796efd]/40 text-[#796efd] hover:bg-[#796efd]/10 hover:text-[#695ef0]"
+                    >
+                      {isLocating ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <MapPin className="h-4 w-4" />
+                      )}
+                      <span className="ml-1.5 hidden sm:inline">
+                        {isLocating ? "Locating" : "Detect"}
+                      </span>
+                    </Button>
+                  </div>
+                  {errors.location && <p className="mt-1 text-sm text-red-600">{errors.location}</p>}
+                  {locationHint && <p className="mt-1 text-xs text-amber-600">{locationHint}</p>}
                 </div>
 
                 <Button
